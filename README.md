@@ -1,8 +1,8 @@
-# **pyMifare**
+# **mifarepy**
 
 ## **Overview**
 
-`pyMifare` is a **Python library** for interfacing with **MIFARE® RFID card readers** using the **GNetPlus® protocol**.
+`mifarepy` is a **Python library** for interfacing with **MIFARE® RFID card readers** using the **GNetPlus® protocol**.
 It enables communication with **PROMAG card readers**, specifically the **PCR310U** and other **GIGA-TMS Inc.** devices
 that support **ISO14443A MIFARE® Ultra-Light/1K/PRO** cards.
 
@@ -16,7 +16,7 @@ This library provides functions for:
 
 ## **Attribution & Original Repository**
 
-This project is **derived from** the original `pyMifare.py` by **Chow Loong Jin & Harish Pillay**.
+This project is **derived from** the original `mifarepy.py` by **Chow Loong Jin & Harish Pillay**.
 
 - **Original Repository:** [gnetplus by harishpillay](https://github.com/harishpillay/gnetplus)
 - **Original Authors:** Chow Loong Jin & Harish Pillay
@@ -41,13 +41,13 @@ These readers operate at **13.56 MHz** and support **MIFARE® 1K/4K, Ultra-Light
 
 ## **Installation**
 
-To install `pyMifare`, ensure **Python 3.6+** is installed, then run:
+To install `mifarepy`, ensure **Python 3.6+** is installed, then run:
 
 ```sh
 pip install pyserial
 ```
 
-Or manually include the `pyMifare.py` file in your project.
+Or manually include the `mifarepy.py` file in your project.
 
 ---
 
@@ -55,10 +55,10 @@ Or manually include the `pyMifare.py` file in your project.
 
 ### **Command-Line Usage**
 
-You can run `pyMifare.py` directly from the command line:
+You can run `mifarepy.py` directly from the command line:
 
 ```sh
-python pyMifare.py /dev/ttyUSB0
+python mifarepy.py /dev/ttyUSB0
 ```
 
 Replace `/dev/ttyUSB0` with the correct serial port.
@@ -68,7 +68,7 @@ Replace `/dev/ttyUSB0` with the correct serial port.
 You can also use it in your Python scripts:
 
 ```python
-from pyMifare import Handle
+from mifarepy import Handle
 
 handle = Handle('/dev/ttyUSB0')
 serial_number = handle.get_sn(as_string=True)
@@ -120,7 +120,7 @@ This library supports the following **GNetPlus® protocol commands**:
 | **Request All**       | Detect multiple cards in the field           |
 
 For a full list of commands, refer to the *
-*[pyMifare Communication Protocol](./TM970013_GNetPlusCommunicationProtocol_REV_D.pdf)**.
+*[mifarepy Communication Protocol](./TM970013_GNetPlusCommunicationProtocol_REV_D.pdf)**.
 
 ---
 

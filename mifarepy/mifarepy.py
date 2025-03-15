@@ -1,4 +1,4 @@
-# pyMifare -- Python library for interfacing with PROMAG RFID card reader
+# mifarepy -- Python library for interfacing with PROMAG RFID card reader
 # Adapted from https://github.com/harishpillay/gnetplus (initially in Python 2)
 #
 # Authors:
@@ -11,7 +11,7 @@
 
 
 """
-pyMifare: A Python library for interfacing with the PROMAG RFID card reader
+mifarepy: A Python library for interfacing with the PROMAG RFID card reader
 using the GNetPlus® protocol.
 
 Features:
@@ -20,7 +20,7 @@ Features:
 - Includes error handling for invalid messages and device errors.
 
 Example:
-    from pyMifare import Handle
+    from mifarepy import Handle
 
     handle = Handle('/dev/ttyUSB0')
     print('S/N:', handle.get_sn(endian='little', as_string=True))

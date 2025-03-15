@@ -1,0 +1,23 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+
+# Ignore virtual environment
+venv/
+.env/
+
+# Ignore test results
+.tox/
+coverage/
+pytest_cache/
+
+# Ignore IDE files
+.vscode/
+.idea/
+.DS_Store
