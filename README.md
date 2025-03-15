@@ -1,5 +1,12 @@
 # **mifarepy**
 
+[![PyPI Version](https://img.shields.io/pypi/v/mifarepy.svg)](https://pypi.org/project/mifarepy/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/mifarepy.svg)](https://pypi.org/project/mifarepy/)
+[![License](https://img.shields.io/github/license/SparkDrago05/mifarepy)](LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/SparkDrago05/mifarepy)](https://github.com/SparkDrago05/mifarepy/issues)
+<!-- [![Build Status](https://github.com/SparkDrago05/mifarepy/actions/workflows/build.yml/badge.svg)](https://github.com/SparkDrago05/mifarepy/actions) -->
+<!-- [![Downloads](https://static.pepy.tech/badge/mifarepy)](https://pepy.tech/project/mifarepy) -->
+
 ## **Overview**
 
 `mifarepy` is a **Python library** for interfacing with **MIFARE® RFID card readers** using the **GNetPlus® protocol**.
