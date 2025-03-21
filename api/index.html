@@ -1,0 +1,1186 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the mifarepy project.">
+      
+      
+        <meta name="author" content="Spark Drago">
+      
+      
+      
+        <link rel="prev" href="../examples/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>API Reference - mifarepy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-mifarepy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="mifarepy" class="md-header__button md-logo" aria-label="mifarepy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mifarepy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="mifarepy" class="md-nav__button md-logo" aria-label="mifarepy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mifarepy
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-invalidmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: InvalidMessage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-gnetpluserror" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: GNetPlusError
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-querymessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: QueryMessage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: QueryMessage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constants-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constants (Examples)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-responsemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: ResponseMessage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: ResponseMessage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handle-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handle Class
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handle Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: Handle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: Handle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-invalidmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: InvalidMessage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-gnetpluserror" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: GNetPlusError
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-querymessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: QueryMessage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: QueryMessage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constants-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constants (Examples)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-responsemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: ResponseMessage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: ResponseMessage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handle-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handle Class
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handle Class">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class: Handle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class: Handle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-reference-mifarepy">API Reference — <code>mifarepy</code></h1>
+<p>This document provides a detailed overview of the classes, methods, and constants available in the <code>mifarepy</code> library, which is used to interface with PROMAG RFID card readers using the GNetPlus® protocol.</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#exceptions">Exceptions</a><ul>
+<li><a href="#class-invalidmessage">InvalidMessage</a></li>
+<li><a href="#class-gnetpluserror">GNetPlusError</a></li>
+</ul>
+</li>
+<li><a href="#message-classes">Message Classes</a><ul>
+<li><a href="#class-message">Message</a></li>
+<li><a href="#class-querymessage">QueryMessage</a></li>
+<li><a href="#class-responsemessage">ResponseMessage</a></li>
+</ul>
+</li>
+<li><a href="#handle-class">Handle Class</a><ul>
+<li><a href="#handle-__init__">Constructor</a></li>
+<li><a href="#handle-sendmsg">sendmsg</a></li>
+<li><a href="#handle-readmsg">readmsg</a></li>
+<li><a href="#handle-get_sn">get_sn</a></li>
+<li><a href="#handle-get_version">get_version</a></li>
+<li><a href="#handle-set_auto_mode">set_auto_mode</a></li>
+<li><a href="#handle-wait_for_card">wait_for_card</a></li>
+</ul>
+</li>
+<li><a href="#additional-notes">Additional Notes</a></li>
+</ul>
+<hr />
+<h2 id="exceptions">Exceptions</h2>
+<h3 id="class-invalidmessage">Class: <code>InvalidMessage</code></h3>
+<ul>
+<li><strong>Description:</strong><br />
+  Raised when an invalid message is received from the RFID reader. This can occur if the header is incomplete, the SOH (Start-of-Header) does not match, the data or CRC is incomplete, or if the CRC check fails.</li>
+<li><strong>Usage:</strong><br />
+  This exception is automatically raised during message parsing in the <code>Message.readfrom</code> method.</li>
+</ul>
+<hr />
+<h3 id="class-gnetpluserror">Class: <code>GNetPlusError</code></h3>
+<ul>
+<li><strong>Description:</strong><br />
+  Thrown when a NAK (negative acknowledge) response is received from the RFID reader. This error indicates that an issue occurred during the communication process.</li>
+<li><strong>Usage:</strong><br />
+  Raised by the <code>Handle.readmsg</code> method when a NAK response is detected. The error message usually includes details from the response's data payload.</li>
+</ul>
+<hr />
+<h2 id="message-classes">Message Classes</h2>
+<h3 id="class-message">Class: <code>Message</code></h3>
+<h4 id="description">Description</h4>
+<p>The base class representing a message to be sent to or received from the RFID reader. This class handles message construction, conversion to raw bytes, and CRC checksum generation.</p>
+<h4 id="methods">Methods</h4>
+<ul>
+<li>
+<p><strong><code>__init__(self, address: int, function: int, data: Union[bytes, str])</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>address</code>: An 8-bit device address (typically 0 unless specified otherwise).</li>
+<li><code>function</code>: An 8-bit function code representing the type of message.</li>
+<li><code>data</code>: The payload for the message, provided as either <code>bytes</code> or a <code>str</code> (if a string is provided, it is encoded using Latin-1).</li>
+</ul>
+<p><strong>Description:</strong><br />
+Initializes the message with the specified address, function code, and data.</p>
+</li>
+<li>
+<p><strong><code>__bytes__(self) -&gt; bytes</code></strong><br />
+<strong>Returns:</strong><br />
+    The binary (raw byte) representation of the message.</p>
+<p><strong>Description:</strong><br />
+Packs the address, function code, and length of the data into bytes, appends the data payload, calculates the 16-bit CRC checksum using <code>gencrc</code>, and then prepends the SOH (Start-of-Header) byte.<br />
+<strong>Message Format:</strong><br />
+<code>[SOH][address][function][data_length][data][CRC16]</code></p>
+</li>
+<li>
+<p><strong><code>__str__(self) -&gt; str</code></strong><br />
+<strong>Returns:</strong><br />
+    A hexadecimal string representation of the message.</p>
+<p><strong>Description:</strong><br />
+Converts the binary message (obtained from <code>__bytes__</code>) into a human-readable hex string.</p>
+</li>
+<li>
+<p><strong><code>__repr__(self) -&gt; str</code></strong><br />
+<strong>Returns:</strong><br />
+    A debug-friendly string representation of the message, showing the address, function code, and data.</p>
+<p><strong>Description:</strong><br />
+Useful for debugging purposes.</p>
+</li>
+<li>
+<p><strong><code>sendto(self, serial_port)</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>serial_port</code>: An open serial port (from the <code>pyserial</code> package).</li>
+</ul>
+<p><strong>Description:</strong><br />
+Sends the constructed message over the provided serial port by writing the raw bytes to it.</p>
+</li>
+<li>
+<p><strong><code>@classmethod readfrom(cls, serial_port)</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>serial_port</code>: The serial port from which the message is read.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+An instance of the <code>Message</code> class constructed from the read data.</p>
+<p><strong>Raises:</strong><br />
+<code>InvalidMessage</code> if the message is incomplete or the CRC check fails.</p>
+<p><strong>Description:</strong><br />
+Reads the message header, data payload, and CRC from the serial port, validates the message integrity, and returns a new message instance.</p>
+</li>
+<li>
+<p><strong><code>@staticmethod gencrc(msg_bytes: bytes) -&gt; int</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>msg_bytes</code>: The message bytes over which the CRC is calculated.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+A 16-bit integer representing the CRC checksum.</p>
+<p><strong>Description:</strong><br />
+Computes a CRC-16 checksum using the polynomial 0xA001 by processing each byte of the message.</p>
+</li>
+</ul>
+<hr />
+<h3 id="class-querymessage">Class: <code>QueryMessage</code></h3>
+<h4 id="description_1">Description</h4>
+<p>A subclass of <code>Message</code> used specifically for query messages (commands) sent from the host to the RFID reader. This class defines constants for various function codes as specified in the GNetPlus® protocol.</p>
+<h4 id="constants-examples">Constants (Examples)</h4>
+<ul>
+<li><code>POLLING = 0x00</code></li>
+<li><code>GET_VERSION = 0x01</code></li>
+<li><code>SET_SLAVE_ADDR = 0x02</code></li>
+<li><code>LOGON = 0x03</code></li>
+<li><code>LOGOFF = 0x04</code></li>
+<li>... (continues up to <code>AUTO_MODE = 0x3F</code>)</li>
+</ul>
+<h4 id="usage">Usage</h4>
+<p>Construct a query message with the desired function code and optional data payload, then send it using the <code>sendto</code> method.</p>
+<hr />
+<h3 id="class-responsemessage">Class: <code>ResponseMessage</code></h3>
+<h4 id="description_2">Description</h4>
+<p>A subclass of <code>Message</code> designed for handling responses from the RFID reader.</p>
+<h4 id="constants">Constants</h4>
+<ul>
+<li><code>ACK = 0x06</code>: Indicates an acknowledgement (successful operation).</li>
+<li><code>NAK = 0x15</code>: Indicates a negative acknowledgement (error occurred).</li>
+<li><code>EVN = 0x12</code>: Indicates an event notification.</li>
+</ul>
+<h4 id="methods_1">Methods</h4>
+<ul>
+<li>
+<p><strong><code>to_error(self) -&gt; Optional[GNetPlusError]</code></strong><br />
+<strong>Returns:</strong><br />
+    An instance of <code>GNetPlusError</code> if the message’s function code is <code>NAK</code>, otherwise <code>None</code>.</p>
+<p><strong>Description:</strong><br />
+Converts a negative acknowledgement response into an error that can be raised by the calling code.</p>
+</li>
+</ul>
+<hr />
+<h2 id="handle-class">Handle Class</h2>
+<h3 id="class-handle">Class: <code>Handle</code></h3>
+<h4 id="description_3">Description</h4>
+<p>The primary class for interfacing with the RFID card reader. It encapsulates the serial connection and provides high-level methods to send commands, read responses, and perform operations such as retrieving the card’s serial number.</p>
+<h4 id="methods_2">Methods</h4>
+<ul>
+<li>
+<p><strong><code>__init__(self, port: str = '/dev/ttyUSB0', baudrate: int = 19200, deviceaddr: int = 0, **kwargs)</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>port</code>: The serial port to connect to (e.g., <code>/dev/ttyUSB0</code>).</li>
+<li><code>baudrate</code>: The baud rate for the serial connection (default is 19200).</li>
+<li><code>deviceaddr</code>: The device address; typically 0 unless otherwise specified.</li>
+<li><code>**kwargs</code>: Additional keyword arguments for the <code>serial.Serial</code> constructor.</li>
+</ul>
+<p><strong>Raises:</strong><br />
+<code>RuntimeError</code> if the serial port cannot be opened.</p>
+<p><strong>Description:</strong><br />
+Initializes the serial connection to the RFID reader. If opening the serial port fails, a <code>RuntimeError</code> is raised with an appropriate error message.</p>
+</li>
+<li>
+<p><strong><code>sendmsg(self, function: int, data: bytes = b'') -&gt; None</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>function</code>: The function code (from <code>QueryMessage</code>) that specifies the command.</li>
+<li><code>data</code>: Optional payload data as bytes.</li>
+</ul>
+<p><strong>Description:</strong><br />
+Constructs a <code>QueryMessage</code> using the device’s address, function code, and data, then sends the message over the established serial connection.</p>
+</li>
+<li>
+<p><strong><code>readmsg(self, sink_events: bool = False) -&gt; ResponseMessage</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>sink_events</code>: A boolean flag indicating whether to ignore event messages (with function code <code>EVN</code>) until a non-event response is received.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+A <code>ResponseMessage</code> instance containing the data received from the RFID reader.</p>
+<p><strong>Raises:</strong><br />
+<code>GNetPlusError</code> if a negative acknowledgement (NAK) response is received.</p>
+<p><strong>Description:</strong><br />
+Continuously reads messages from the serial port until a valid (non-event) message is obtained. If a NAK is received, it is converted to a <code>GNetPlusError</code> and raised.</p>
+</li>
+<li>
+<p><strong><code>get_sn(self, endian: str = 'little', as_string: bool = True) -&gt; Union[str, int]</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>endian</code>: Specifies the byte order for interpreting the UID. Acceptable values are <code>'big'</code> or <code>'little'</code>.  </li>
+<li>For example, raw data <code>b'\xE3\x0E\x27\x0E'</code> is interpreted as:<ul>
+<li><code>'big'</code>: <code>0xE30E270E</code></li>
+<li><code>'little'</code>: <code>0x0E270EE3</code></li>
+</ul>
+</li>
+<li><code>as_string</code>: If <code>True</code>, returns the UID as a formatted hexadecimal string (e.g., <code>"0x0E270EE3"</code>); otherwise, returns it as an integer.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+The serial number of the card currently scanned.</p>
+<p><strong>Description:</strong><br />
+Retrieves the card’s serial number by sending a <code>REQUEST</code> command followed by an <code>ANTI_COLLISION</code> command to resolve potential collisions. The response data is unpacked according to the specified endian format and returned in the requested format.</p>
+</li>
+<li>
+<p><strong><code>get_version(self) -&gt; bytes</code></strong><br />
+<strong>Returns:</strong><br />
+    A byte string containing the product version string of the RFID reader.</p>
+<p><strong>Description:</strong><br />
+Sends the <code>GET_VERSION</code> command to the RFID reader and returns the version information. The returned bytes may include null characters; therefore, proper handling is recommended when displaying or processing the version string.</p>
+</li>
+<li>
+<p><strong><code>set_auto_mode(self, enabled: bool = True) -&gt; bytes</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>enabled</code>: A boolean indicating whether to enable (<code>True</code>) or disable (<code>False</code>) auto mode.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+The response data from the RFID reader as bytes.</p>
+<p><strong>Raises:</strong><br />
+<code>GNetPlusError</code> if the response data does not match the expected mode (indicating that setting auto mode failed).</p>
+<p><strong>Description:</strong><br />
+Toggles the RFID reader’s auto mode by sending the <code>AUTO_MODE</code> command with the corresponding mode byte (<code>\x01</code> for enabled, <code>\x00</code> for disabled). The method then verifies that the response matches the intended mode.</p>
+</li>
+<li>
+<p><strong><code>wait_for_card(self, timeout: int = 10) -&gt; Optional[str]</code></strong><br />
+<strong>Parameters:</strong></p>
+<ul>
+<li><code>timeout</code>: The maximum number of seconds to wait for a card to be detected (default is 10 seconds).</li>
+</ul>
+<p><strong>Returns:</strong><br />
+The card’s serial number as a formatted hexadecimal string if detected; otherwise, returns <code>None</code>.</p>
+<p><strong>Raises:</strong><br />
+<code>TimeoutError</code> if no card is detected within the specified timeout period.</p>
+<p><strong>Description:</strong><br />
+First attempts to detect a card immediately. If unsuccessful, enters a loop where it periodically checks for a card event. When a card is detected (usually indicated by an event message containing a specific marker), it retrieves and returns the serial number. If no card is detected within the timeout, a <code>TimeoutError</code> is raised.</p>
+</li>
+</ul>
+<hr />
+<h2 id="additional-notes">Additional Notes</h2>
+<ul>
+<li>
+<p><strong>Data Encoding:</strong><br />
+  The <code>Message</code> class encodes string data using Latin-1 encoding, ensuring that the data is properly formatted as bytes for serial transmission.</p>
+</li>
+<li>
+<p><strong>CRC Calculation:</strong><br />
+  The static method <code>gencrc</code> implements a CRC-16 checksum calculation using the polynomial <code>0xA001</code>, ensuring data integrity.</p>
+</li>
+<li>
+<p><strong>Event Handling:</strong><br />
+  The <code>readmsg</code> method can be set to ignore event messages (with function code <code>EVN</code>) using the <code>sink_events</code> flag, so that only responses to commands are processed.</p>
+</li>
+<li>
+<p><strong>Error Handling:</strong><br />
+  If a NAK (negative acknowledge) response is received, the <code>to_error</code> method of the <code>ResponseMessage</code> class converts it into a <code>GNetPlusError</code>, which is then raised by <code>readmsg</code>.</p>
+</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
