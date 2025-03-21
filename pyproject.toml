@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel", "build"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mifarepy"
-version = "1.0.2"
+version = "1.0.3"
 description = "Python library for interfacing with MIFARE RFID card readers using mifarepy protocol"
 authors = [
     { name = "Spark Drago", email = "huzaifa.farooq05@gmail.com" }
@@ -23,3 +23,9 @@ classifiers = [
 
 [tool.setuptools]
 packages = ["mifarepy"]
+
+[tool.setuptools.package-data]
+mifarepy = ["*.txt", "*.md"]
+
+[tool.setuptools.dynamic]
+version = {attr = "mifarepy.__version__"}

@@ -2,10 +2,10 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/mifarepy.svg)](https://pypi.org/project/mifarepy/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/mifarepy.svg)](https://pypi.org/project/mifarepy/)
+[![PyPI Downloads](https://static.pepy.tech/badge/mifarepy)](https://pepy.tech/projects/mifarepy)
 [![License](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/SparkDrago05/mifarepy)](https://github.com/SparkDrago05/mifarepy/issues)
 <!-- [![Build Status](https://github.com/SparkDrago05/mifarepy/actions/workflows/build.yml/badge.svg)](https://github.com/SparkDrago05/mifarepy/actions) -->
-<!-- [![Downloads](https://static.pepy.tech/badge/mifarepy)](https://pepy.tech/project/mifarepy) -->
 
 ## **Overview**
 
@@ -23,13 +23,13 @@ This library provides functions for:
 
 ## **Attribution & Original Repository**
 
-This project is **derived from** the original `mifarepy.py` by **Chow Loong Jin & Harish Pillay**.
+This project is **derived from** the original `gnetplus.py` which is written in Python 2 by **Chow Loong Jin & Harish Pillay**.
 
 - **Original Repository:** [gnetplus by harishpillay](https://github.com/harishpillay/gnetplus)
 - **Original Authors:** Chow Loong Jin & Harish Pillay
 - **License:** This project remains under **LGPL v3.0 or later** to comply with the original licensing terms.
 
-This version of `gnetplus.py` includes **bug fixes, documentation improvements, and enhanced compatibility**.
+This version of `gnetplus.py` includes **bug fixes, more features, documentation improvements, and enhanced compatibility**.
 
 ---
 
@@ -51,7 +51,7 @@ These readers operate at **13.56 MHz** and support **MIFARE® 1K/4K, Ultra-Light
 To install `mifarepy`, ensure **Python 3.6+** is installed, then run:
 
 ```sh
-pip install pyserial
+pip install mifarepy
 ```
 
 Or manually include the `mifarepy.py` file in your project.

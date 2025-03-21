@@ -1,0 +1,14 @@
+site_name: mifarepy
+site_description: "Documentation for the mifarepy project."
+site_author: "Spark Drago"
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Examples: examples.md
+  - API Reference: api.md
+  - Contributing: contributing.md
+

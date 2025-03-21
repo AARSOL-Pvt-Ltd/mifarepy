@@ -26,7 +26,7 @@ Example:
     print('S/N:', handle.get_sn(endian='little', as_string=True))
 
 License:
-    GNU Lesser General Public License v2.1 or later
+    GNU Lesser General Public License v3.0 or later
 """
 
 import logging
@@ -305,14 +305,16 @@ class Handle(object):
 
         return f'0x{uid:08X}' if as_string else uid
 
-    def get_version(self) -> bytes:
+    def get_version(self) -> str:
         """
         Get product version string. May contain null bytes, so be careful when using it.
 
         @returns Product version string of the device connected to this handle.
         """
         self.sendmsg(QueryMessage.GET_VERSION)
-        return self.readmsg().data
+        response = self.readmsg().data
+        # Decode the version data; ignore decode errors if non-text bytes appear
+        return response.decode('latin1', errors='ignore').strip()
 
     def set_auto_mode(self, enabled: bool = True) -> bytes:
         """
@@ -361,7 +363,7 @@ class Handle(object):
 
 if __name__ == '__main__':
     try:
-        port = '/dev/ttyUSB0'
+        port = sys.argv[1]
     except IndexError:
         sys.stderr.write('Usage: {0} <serial port>, example /dev/ttyUSB0\n'.format(sys.argv[0]))
         sys.exit(1)

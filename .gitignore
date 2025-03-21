@@ -21,3 +21,6 @@ pytest_cache/
 .vscode/
 .idea/
 .DS_Store
+
+# Ignore MkDocs files
+site/
