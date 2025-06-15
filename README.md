@@ -9,15 +9,16 @@
 
 ## **Overview**
 
-`mifarepy` is a **Python library** for interfacing with **MIFARE® RFID card readers** using the **GNetPlus® protocol**.
-It enables communication with **PROMAG card readers**, specifically the **PCR310U** and other **GIGA-TMS Inc.** devices
-that support **ISO14443A MIFARE® Ultra-Light/1K/PRO** cards.
-
-This library provides functions for:
-
-- **Reading serial numbers** from MIFARE® cards
+`mifarepy` is a **Python library** for interfacing with **MIFARE® RFID card readers** (e.g., PROMAG PCR310U, MF5, MF10) using the **GNetPlus® protocol**.
+It provides a clean, object-oriented API for performing common operations such as:
 - **Interacting via RS232 and USB-serial** interfaces
 - **Supporting GNetPlus® commands** (Read, Write, Authenticate, Auto Mode, etc.)
+- Reading a card’s serial number (`get_sn`, `wait_for_card`)
+- Querying reader firmware version (`get_version`)
+- Enabling/disabling automatic card events (`set_auto_mode`, `wait_for_card`)
+- Authenticating sectors (`authenticate_sector`)
+- Reading and writing 16‑byte blocks (`read_block`, `write_block`)
+- Bulk operations on sectors and arbitrary block mappings (`read_sector`, `write_sector`, `read_blocks`, `write_blocks`)
 
 ---
 
@@ -58,30 +59,31 @@ Or manually include the `mifarepy.py` file in your project.
 
 ---
 
-## **Usage**
-
-### **Command-Line Usage**
-
-You can run `mifarepy.py` directly from the command line:
-
-```sh
-python mifarepy.py /dev/ttyUSB0
-```
-
-Replace `/dev/ttyUSB0` with the correct serial port.
-
-### **Library Usage (Python)**
-
-You can also use it in your Python scripts:
+## Quickstart
 
 ```python
-from mifarepy import Handle
+from mifarepy.reader import MifareReader
 
-handle = Handle('/dev/ttyUSB0')
-serial_number = handle.get_sn(as_string=True)
-print(f'Found card: {serial_number}')
+# Initialize the reader on your serial port
+reader = MifareReader('/dev/ttyUSB0')
+
+# Enable auto mode and wait for card detection
+reader.set_auto_mode(True)
+card_sn = reader.wait_for_card(timeout=10)
+print('Found card:', card_sn)
+
+# Authenticate sector 1 with the default Key A
+default_key = bytes.fromhex('FFFFFFFFFFFF')
+reader.authenticate_sector(sector=1, key=default_key, key_type='A')
+
+# Read block 4 and display as hex
+block_data = reader.read_block(4)
+print('Block 4 data:', block_data)
+
+# Write 16 bytes to block 4
+payload = bytes(range(16))
+reader.write_block(4, payload)
 ```
-
 ---
 
 ## **Communicating with the Reader**

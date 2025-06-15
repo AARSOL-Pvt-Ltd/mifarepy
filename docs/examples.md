@@ -1,78 +1,146 @@
-# 📝 Examples
+# 🔍 Examples
 
-### Example 1: Authenticating a Sector and Reading from a Block
+These examples demonstrate common **mifarepy** workflows using the `MifareReader` API.
 
-In this example, we demonstrate how to save the default key, authenticate a specific sector, and then read data from a block within that sector.
+---
 
-```python
-from mifarepy import Handle, QueryMessage
-
-# Initialize the RFID reader handle on the correct serial port.
-handle = Handle('/dev/ttyUSB0')
-# Wait for a card to be detected.
-handle.wait_for_card()
-
-# --- Step 1: Save the Key to the Reader ---
-sector = 2                       # The sector to authenticate.
-key_type = 0x60                  # Key A (use 0x61 for Key B if required).
-default_key = "FFFFFFFFFFFF"      # Default key in hexadecimal.
-
-# Build the payload: key type (1 byte), sector (1 byte), followed by key bytes.
-save_key_data = bytes([key_type, sector]) + bytes.fromhex(default_key)
-handle.sendmsg(QueryMessage.SAVE_KEY, save_key_data)
-save_key_ack = handle.readmsg()
-print("SAVE_KEY ACK:", save_key_ack.data.hex())
-
-# --- Step 2: Authenticate the Sector ---
-auth_data = bytes([key_type, sector])
-handle.sendmsg(QueryMessage.AUTHENTICATE, auth_data)
-auth_ack = handle.readmsg()
-print("AUTHENTICATE ACK:", auth_ack.data.hex())
-
-# --- Step 3: Read from a Block in the Authenticated Sector ---
-block_number = 0  # The block number to read from.
-handle.sendmsg(QueryMessage.READ_BLOCK, bytes([block_number]))
-block_response = handle.readmsg()
-print("Block Data:", block_response.data.hex())
-```
-
-### Example 2: Switching Sectors and Refreshing the Card Session
-
-When switching to a new sector, it's important to refresh the card session by sending an ANTI_COLLISION command. This example shows how to do that before authenticating the new sector and reading from a block.
+## 1️⃣ Detect and Read Card UID
 
 ```python
-from mifarepy import Handle, QueryMessage
+from mifarepy import MifareReader
 
-# Initialize the RFID reader handle.
-handle = Handle('/dev/ttyUSB0')
+# 1. Initialize reader
+reader = MifareReader(port='/dev/ttyUSB0')
 
-# Assume you have finished operations in the current sector.
-# Now you want to switch to a new sector (e.g., sector 3).
-new_sector = 3
-key_type = 0x60                  # Using Key A.
-default_key = "FFFFFFFFFFFF"      # Default key in hexadecimal.
-
-# --- Step 1: Refresh the Card Session ---
-# When switching sectors, send the ANTI_COLLISION command to re-identify the card.
-handle.sendmsg(QueryMessage.ANTI_COLLISION, b'')
-anti_collision_response = handle.readmsg(sink_events=True)
-print("ANTI_COLLISION Response:", anti_collision_response.data.hex())
-
-# --- Step 2: Save the Key for the New Sector ---
-save_key_data = bytes([key_type, new_sector]) + bytes.fromhex(default_key)
-handle.sendmsg(QueryMessage.SAVE_KEY, save_key_data)
-save_key_ack = handle.readmsg()
-print("SAVE_KEY ACK (New Sector):", save_key_ack.data.hex())
-
-# --- Step 3: Authenticate the New Sector ---
-auth_data = bytes([key_type, new_sector])
-handle.sendmsg(QueryMessage.AUTHENTICATE, auth_data)
-auth_ack = handle.readmsg()
-print("AUTHENTICATE ACK (New Sector):", auth_ack.data.hex())
-
-# --- Step 4: Read from a Block in the New Sector ---
-block_number = 8  # Specify the block number to read from in the new sector.
-handle.sendmsg(QueryMessage.READ_BLOCK, bytes([block_number]))
-block_response = handle.readmsg()
-print("Block Data (New Sector):", block_response.data.hex())
+# 2. Enable auto‐mode and wait for a card
+reader.set_auto_mode(True)
+try:
+    uid = reader.wait_for_card(timeout=5)
+    print(f"✅ Detected card UID: {uid}")
+except TimeoutError:
+    print("⏰ No card detected within 5 seconds.")
 ```
+
+**What’s happening**:
+- `set_auto_mode(True)`: Reader emits events when cards enter field.
+- `wait_for_card()`: Blocks until a card is seen or timeout.
+
+---
+
+## 2️⃣ Authenticate Sector & Read Block
+
+```python
+from mifarepy import MifareReader
+
+reader = MifareReader('/dev/ttyUSB0')
+
+# Default MIFARE Key A
+key_a = bytes.fromhex('FFFFFFFFFFFF')
+sector = 1
+block = 0  # first block in sector 1
+
+# Authenticate sector
+reader.authenticate_sector(sector=sector, key=key_a, key_type='A')
+
+# Read block data
+data = reader.read_block(block)
+print(f"Block {block} data: {data.hex()}")
+```
+
+**Details**:
+- `authenticate_sector()`: Loads and uses Key A to unlock sector.
+- `read_block()`: Reads 16 bytes from specified block index.
+
+---
+
+## 3️⃣ Write to a Block
+
+```python
+from mifarepy import MifareReader
+
+reader = MifareReader('/dev/ttyUSB0')
+
+# Authenticate first
+reader.authenticate_sector(sector=1, key=key_a)
+
+# Prepare payload
+payload = bytes(range(16))  # 0x00..0x0F
+block = 1 # Second block in Sector 1
+
+# Write and verify
+reader.write_block(block, payload)
+print(f"✍️ Wrote to block {block} successfully.")
+```
+
+**Note**: Data must be exactly 16 bytes.
+
+---
+
+## 4️⃣ Read Entire Sector
+
+```python
+from mifarepy import MifareReader
+
+reader = MifareReader('/dev/ttyUSB0')
+reader.authenticate_sector(sector=2, key=key_a)
+
+sector_data = reader.read_sector(sector=2)
+for block, blk_data in sector_data.items():
+    print(f"Block {block}: {blk_data.hex()}")
+```
+
+- Returns a mapping of offsets (0–3) to block bytes.
+
+---
+
+## 5️⃣ Write Multiple Blocks in Sector
+
+```python
+from mifarepy import MifareReader
+
+reader = MifareReader('/dev/ttyUSB0')
+reader.authenticate_sector(sector=2, key=key_a)
+
+updates = {
+    0: bytes([0xAA] * 16),  # First Block of Sector 2 
+    2: bytes([0xBB] * 16)   # Third Block of Sector 2
+}
+reader.write_sector(sector=2, data_blocks=updates)
+print("🔧 Sector 2 updated on blocks 0 and 2.")
+```
+
+Data for unspecified offsets remains unchanged.
+
+---
+
+## 6️⃣ Bulk Mapping: Read and Write
+
+```python
+from mifarepy import MifareReader
+
+reader = MifareReader('/dev/ttyUSB0')
+
+# Define mapping: sector → list of offsets
+read_map = {1: [0,1], 3: [2,3]}
+
+# Optionally provide per-sector keys
+keys = {1: key_a, 3: key_a}
+
+data = reader.read_blocks(mapping=read_map, raw=False, combine=False, keys=keys)
+print(data)
+
+# Write mapping: full blob for sector 1 and dict for sector 3
+write_map = {
+    1: bytes(range(48)),             # three-block blob
+    3: {0: b'HELLO-R3'*2, 3: b'BYE-R3'*2}
+}
+reader.write_blocks(mapping=write_map, keys=keys)
+print("🚀 Bulk operations complete.")
+```
+
+- **`read_blocks`**: Reads arbitrary sets of blocks across sectors.
+- **`write_blocks`**: Writes sector-wide or per-block based on mapping.
+
+---
+
+_For more details, see [usage](usage.md) and [api](api.md)._

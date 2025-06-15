@@ -2,16 +2,16 @@ name: Deploy MkDocs Site
 
 on:
   push:
-    branches:
-      - main  # or your primary branch name
+    branches: [ main ]
+  # optionally, also on:
+  #   tags: [ 'v*.*.*' ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -20,9 +20,17 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install mkdocs mkdocs-material
+          pip install mkdocs-material mike
 
-      - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+      # 2️⃣ On each new tag (or on every main-branch push), deploy as “latest”
+      - name: Deploy new version (latest)
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ github.ref_name }}
+        run: |
+          mike deploy $VERSION latest \
+            --update-aliases \
+            --branch=gh-pages \
+            --remote-name=origin \
+            --push

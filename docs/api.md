@@ -1,265 +1,307 @@
-# API Reference — `mifarepy`
+# API Reference
 
-This document provides a detailed overview of the classes, methods, and constants available in the `mifarepy` library, which is used to interface with PROMAG RFID card readers using the GNetPlus® protocol.
-
----
-
-## Table of Contents
-
-- [Exceptions](#exceptions)
-    - [InvalidMessage](#class-invalidmessage)
-    - [GNetPlusError](#class-gnetpluserror)
-- [Message Classes](#message-classes)
-    - [Message](#class-message)
-    - [QueryMessage](#class-querymessage)
-    - [ResponseMessage](#class-responsemessage)
-- [Handle Class](#handle-class)
-    - [Constructor](#handle-__init__)
-    - [sendmsg](#handle-sendmsg)
-    - [readmsg](#handle-readmsg)
-    - [get_sn](#handle-get_sn)
-    - [get_version](#handle-get_version)
-    - [set_auto_mode](#handle-set_auto_mode)
-    - [wait_for_card](#handle-wait_for_card)
-- [Additional Notes](#additional-notes)
+This document provides an in-depth reference for every public class, function, and method in the **mifarepy** library, complete with parameter descriptions, return values, exceptions raised, and detailed behavior narratives.
 
 ---
 
-## Exceptions
+## Package Structure
 
-### Class: `InvalidMessage`
-- **Description:**  
-  Raised when an invalid message is received from the RFID reader. This can occur if the header is incomplete, the SOH (Start-of-Header) does not match, the data or CRC is incomplete, or if the CRC check fails.
-- **Usage:**  
-  This exception is automatically raised during message parsing in the `Message.readfrom` method.
+```
+mifarepy/
+├── protocol.py      # Core message framing, CRC, and error classes
+└── reader.py        # High-level MifareReader interface and card operations
+```
 
----
+Import core components:
 
-### Class: `GNetPlusError`
-- **Description:**  
-  Thrown when a NAK (negative acknowledge) response is received from the RFID reader. This error indicates that an issue occurred during the communication process.
-- **Usage:**  
-  Raised by the `Handle.readmsg` method when a NAK response is detected. The error message usually includes details from the response's data payload.
-
----
-
-## Message Classes
-
-### Class: `Message`
-#### Description
-  The base class representing a message to be sent to or received from the RFID reader. This class handles message construction, conversion to raw bytes, and CRC checksum generation.
-
-#### Methods
-
-- **`__init__(self, address: int, function: int, data: Union[bytes, str])`**  
-    **Parameters:**
-    - `address`: An 8-bit device address (typically 0 unless specified otherwise).
-    - `function`: An 8-bit function code representing the type of message.
-    - `data`: The payload for the message, provided as either `bytes` or a `str` (if a string is provided, it is encoded using Latin-1).
-  
-    **Description:**  
-    Initializes the message with the specified address, function code, and data.
-
-- **`__bytes__(self) -> bytes`**  
-    **Returns:**  
-    The binary (raw byte) representation of the message.
-  
-    **Description:**  
-    Packs the address, function code, and length of the data into bytes, appends the data payload, calculates the 16-bit CRC checksum using `gencrc`, and then prepends the SOH (Start-of-Header) byte.  
-    **Message Format:**  
-    `[SOH][address][function][data_length][data][CRC16]`
-
-- **`__str__(self) -> str`**  
-    **Returns:**  
-    A hexadecimal string representation of the message.
-  
-    **Description:**  
-    Converts the binary message (obtained from `__bytes__`) into a human-readable hex string.
-
-- **`__repr__(self) -> str`**  
-    **Returns:**  
-    A debug-friendly string representation of the message, showing the address, function code, and data.
-  
-    **Description:**  
-    Useful for debugging purposes.
-
-- **`sendto(self, serial_port)`**  
-    **Parameters:**
-    - `serial_port`: An open serial port (from the `pyserial` package).
-  
-    **Description:**  
-    Sends the constructed message over the provided serial port by writing the raw bytes to it.
-
-- **`@classmethod readfrom(cls, serial_port)`**  
-    **Parameters:**
-    - `serial_port`: The serial port from which the message is read.
-  
-    **Returns:**  
-    An instance of the `Message` class constructed from the read data.
-  
-    **Raises:**  
-    `InvalidMessage` if the message is incomplete or the CRC check fails.
-  
-    **Description:**  
-    Reads the message header, data payload, and CRC from the serial port, validates the message integrity, and returns a new message instance.
-
-- **`@staticmethod gencrc(msg_bytes: bytes) -> int`**  
-    **Parameters:**
-    - `msg_bytes`: The message bytes over which the CRC is calculated.
-  
-    **Returns:**  
-    A 16-bit integer representing the CRC checksum.
-  
-    **Description:**  
-    Computes a CRC-16 checksum using the polynomial 0xA001 by processing each byte of the message.
+```python
+import mifarepy
+from mifarepy.protocol import (
+    gencrc,
+    Message,
+    QueryMessage,
+    ResponseMessage,
+    InvalidMessage,
+    GNetPlusError
+)
+from mifarepy.reader import MifareReader
+```
 
 ---
 
-### Class: `QueryMessage`
-#### Description
-  A subclass of `Message` used specifically for query messages (commands) sent from the host to the RFID reader. This class defines constants for various function codes as specified in the GNetPlus® protocol.
-  
-#### Constants (Examples)
-  - `POLLING = 0x00`
-  - `GET_VERSION = 0x01`
-  - `SET_SLAVE_ADDR = 0x02`
-  - `LOGON = 0x03`
-  - `LOGOFF = 0x04`
-  - ... (continues up to `AUTO_MODE = 0x3F`)
-  
-#### Usage 
-  Construct a query message with the desired function code and optional data payload, then send it using the `sendto` method.
+## `protocol.py`
+
+### `gencrc(msg_bytes: bytes) -> int`
+**Description:** Calculates the 16-bit CRC (Cyclic Redundancy Check) for a given sequence of bytes, following the GNetPlus® protocol specification. This checksum is appended to each message to ensure data integrity.
+
+- **Parameters:**
+  - `msg_bytes` (`bytes`): The header and payload bytes over which to compute the CRC (Exclude SOH and the trailing CRC field).
+- **Returns:**
+  - (`int`) CRC value ranging from `0` to `0xFFFF`.
+- **Raises:** None.
 
 ---
 
-### Class: `ResponseMessage`
-#### Description
-  A subclass of `Message` designed for handling responses from the RFID reader.
-  
-#### Constants
-  - `ACK = 0x06`: Indicates an acknowledgement (successful operation).
-  - `NAK = 0x15`: Indicates a negative acknowledgement (error occurred).
-  - `EVN = 0x12`: Indicates an event notification.
-  
-#### Methods
-  - **`to_error(self) -> Optional[GNetPlusError]`**  
-    **Returns:**  
-    An instance of `GNetPlusError` if the message’s function code is `NAK`, otherwise `None`.
-    
-    **Description:**  
-    Converts a negative acknowledgement response into an error that can be raised by the calling code.
+### `class InvalidMessage(Exception)`
+**Description:** Thrown during message parsing when the data read from the serial port is malformed, incomplete, or fails the CRC check.
+
+- **Raised When:**
+  - The Start-of-Header (SOH) byte is incorrect.
+  - The header or payload length is less than expected.
+  - CRC validation fails.
 
 ---
 
-## Handle Class
+### `class GNetPlusError(Exception)`
+**Description:** Represents a protocol-level or device error signaled by a Negative Acknowledge (NAK) from the reader.
 
-### Class: `Handle`
-#### Description 
-  The primary class for interfacing with the RFID card reader. It encapsulates the serial connection and provides high-level methods to send commands, read responses, and perform operations such as retrieving the card’s serial number.
-
-#### Methods
-
-- **`__init__(self, port: str = '/dev/ttyUSB0', baudrate: int = 19200, deviceaddr: int = 0, **kwargs)`**  
-    **Parameters:**
-    - `port`: The serial port to connect to (e.g., `/dev/ttyUSB0`).
-    - `baudrate`: The baud rate for the serial connection (default is 19200).
-    - `deviceaddr`: The device address; typically 0 unless otherwise specified.
-    - `**kwargs`: Additional keyword arguments for the `serial.Serial` constructor.
-  
-    **Raises:**  
-    `RuntimeError` if the serial port cannot be opened.
-  
-    **Description:**  
-    Initializes the serial connection to the RFID reader. If opening the serial port fails, a `RuntimeError` is raised with an appropriate error message.
-
-
-- **`sendmsg(self, function: int, data: bytes = b'') -> None`**  
-    **Parameters:**
-    - `function`: The function code (from `QueryMessage`) that specifies the command.
-    - `data`: Optional payload data as bytes.
-  
-    **Description:**  
-    Constructs a `QueryMessage` using the device’s address, function code, and data, then sends the message over the established serial connection.
-
-
-- **`readmsg(self, sink_events: bool = False) -> ResponseMessage`**  
-    **Parameters:**
-    - `sink_events`: A boolean flag indicating whether to ignore event messages (with function code `EVN`) until a non-event response is received.
-  
-    **Returns:**  
-    A `ResponseMessage` instance containing the data received from the RFID reader.
-  
-    **Raises:**  
-    `GNetPlusError` if a negative acknowledgement (NAK) response is received.
-  
-    **Description:**  
-    Continuously reads messages from the serial port until a valid (non-event) message is obtained. If a NAK is received, it is converted to a `GNetPlusError` and raised.
-
-
-- **`get_sn(self, endian: str = 'little', as_string: bool = True) -> Union[str, int]`**  
-    **Parameters:**
-    - `endian`: Specifies the byte order for interpreting the UID. Acceptable values are `'big'` or `'little'`.  
-      - For example, raw data `b'\xE3\x0E\x27\x0E'` is interpreted as:
-        - `'big'`: `0xE30E270E`
-        - `'little'`: `0x0E270EE3`
-    - `as_string`: If `True`, returns the UID as a formatted hexadecimal string (e.g., `"0x0E270EE3"`); otherwise, returns it as an integer.
-  
-    **Returns:**  
-    The serial number of the card currently scanned.
-  
-    **Description:**  
-    Retrieves the card’s serial number by sending a `REQUEST` command followed by an `ANTI_COLLISION` command to resolve potential collisions. The response data is unpacked according to the specified endian format and returned in the requested format.
-
-
-- **`get_version(self) -> bytes`**  
-    **Returns:**  
-    A byte string containing the product version string of the RFID reader.
-  
-    **Description:**  
-    Sends the `GET_VERSION` command to the RFID reader and returns the version information. The returned bytes may include null characters; therefore, proper handling is recommended when displaying or processing the version string.
-
-
-- **`set_auto_mode(self, enabled: bool = True) -> bytes`**  
-    **Parameters:**
-    - `enabled`: A boolean indicating whether to enable (`True`) or disable (`False`) auto mode.
-  
-    **Returns:**  
-    The response data from the RFID reader as bytes.
-  
-    **Raises:**  
-    `GNetPlusError` if the response data does not match the expected mode (indicating that setting auto mode failed).
-  
-    **Description:**  
-    Toggles the RFID reader’s auto mode by sending the `AUTO_MODE` command with the corresponding mode byte (`\x01` for enabled, `\x00` for disabled). The method then verifies that the response matches the intended mode.
-
-
-- **`wait_for_card(self, timeout: int = 10) -> Optional[str]`**  
-    **Parameters:**
-    - `timeout`: The maximum number of seconds to wait for a card to be detected (default is 10 seconds).
-  
-    **Returns:**  
-    The card’s serial number as a formatted hexadecimal string if detected; otherwise, returns `None`.
-  
-    **Raises:**  
-    `TimeoutError` if no card is detected within the specified timeout period.
-  
-    **Description:**  
-    First attempts to detect a card immediately. If unsuccessful, enters a loop where it periodically checks for a card event. When a card is detected (usually indicated by an event message containing a specific marker), it retrieves and returns the serial number. If no card is detected within the timeout, a `TimeoutError` is raised.
+- **Raised When:** A `ResponseMessage` with `function == ResponseMessage.NAK` is received. The exception carries the raw NAK payload for diagnostics.
 
 ---
 
-## Additional Notes
+### `class Message`
+**Description:** Base class encapsulating the raw binary format of any GNetPlus® message (both queries and responses). Handles packing to bytes and unpacking from bytes with CRC.
 
-- **Data Encoding:**  
-  The `Message` class encodes string data using Latin-1 encoding, ensuring that the data is properly formatted as bytes for serial transmission.
+#### Constructor
+```python
+Message(address: int, function: int, data: bytes)
+```
+- **Parameters:**
+  - `address` (`int`): The 8-bit device address (commonly `0`).
+  - `function` (`int`): The 8-bit function or command code.
+  - `data` (`bytes`): Payload data.
+- **Behavior:** Stores inputs; used by `__bytes__` and `readfrom` methods.
 
-- **CRC Calculation:**  
-  The static method `gencrc` implements a CRC-16 checksum calculation using the polynomial `0xA001`, ensuring data integrity.
+#### `__bytes__(self) -> bytes`
+**Description:** Serializes the `Message` into the wire format:
 
-- **Event Handling:**  
-  The `readmsg` method can be set to ignore event messages (with function code `EVN`) using the `sink_events` flag, so that only responses to commands are processed.
+```
+[SOH=0x01][address][function][length][data...][CRC-high][CRC-low]
+```
 
-- **Error Handling:**  
-  If a NAK (negative acknowledge) response is received, the `to_error` method of the `ResponseMessage` class converts it into a `GNetPlusError`, which is then raised by `readmsg`.
+- **Returns:** A `bytes` object ready to write to a serial port.
+
+#### `@classmethod readfrom(cls, serial_port) -> Message`
+**Description:** Reads raw bytes from a `serial_port` instance and constructs a `Message` object, validating framing and CRC.
+
+- **Parameters:**
+  - `serial_port`: An object with a `.read(n)` method (e.g., `serial.Serial`).
+- **Behavior:**
+  1. Reads 1 byte for SOH, 3 bytes for header. Validates SOH.
+  2. Extracts `address`, `function`, and `length`.
+  3. Reads `length` bytes of payload.
+  4. Reads 2-byte CRC, computes expected CRC via `gencrc`.
+  5. Raises `InvalidMessage` if any step fails.
+- **Returns:** A `Message` instance with `.address`, `.function`, `.data` set.
+- **Raises:** `InvalidMessage` on framing, length, or CRC errors.
 
 ---
+
+### `class QueryMessage(Message)`
+**Description:** Subclass of `Message` defining constants for all supported outgoing commands in the GNetPlus® protocol.
+
+| Constant         | Hex Value | Description                                 |
+|------------------|-----------|---------------------------------------------|
+| `POLLING`        | `0x00`    | Ping the reader to check connectivity       |
+| `GET_VERSION`    | `0x01`    | Request reader firmware version             |
+| `AUTO_MODE`      | `0x3F`    | Enable/disable automatic card event reporting |
+| `REQUEST`        | `0x20`    | Begin anti-collision to detect one card UID |
+| `ANTI_COLLISION` | `0x21`    | Complete anti-collision, retrieve full UID  |
+| `SELECT_CARD`    | `0x22`    | Select a specific card after UID retrieval  |
+| `AUTHENTICATE`   | `0x23`    | Authenticate a sector using loaded key      |
+| `READ_BLOCK`     | `0x24`    | Read a single 16-byte block                 |
+| `WRITE_BLOCK`    | `0x25`    | Write a single 16-byte block                |
+| `SAVE_KEY`       | `0x2B`    | Load a 6-byte MIFARE key into reader RAM    |
+
+Use these as:
+```python
+msg = QueryMessage(address, QueryMessage.READ_BLOCK, payload)
+```
+
+---
+
+### `class ResponseMessage(Message)`
+**Description:** Subclass for replies from the reader. Interprets acknowledgement, errors, and event notifications.
+
+| Constant | Hex Value | Description                                |
+|----------|-----------|--------------------------------------------|
+| `ACK`    | `0x06`    | Positive acknowledgement                   |
+| `NAK`    | `0x15`    | Negative acknowledgement (error)           |
+| `EVN`    | `0x12`    | Event notification (e.g., card arrival)    |
+
+#### `to_error(self) -> Optional[GNetPlusError]`
+**Description:** Converts a NAK response into a `GNetPlusError`. If the response is not NAK, returns `None`.
+
+- **Returns:** A `GNetPlusError` instance for NAK responses, or `None` otherwise.
+
+---
+
+## reader.py
+
+### `class MifareReader`
+**Description:** High-level interface encapsulating serial communication and common card operations. Simplifies sending commands, parsing responses, and handling errors.
+
+#### Constructor
+```python
+MifareReader(
+    port: str = '/dev/ttyUSB0',
+    baudrate: int = 19200,
+    address: int = 0,
+    **kwargs
+)
+```
+- **Parameters:**
+  - `port` (`str`): Path to serial device or COM port.
+  - `baudrate` (`int`): Communication speed (default `19200`).
+  - `address` (`int`): Reader device address (usually 0).
+  - `**kwargs`: Additional settings for `serial.Serial` (e.g., `timeout`).
+- **Behavior:** Opens serial port; raises `RuntimeError` on failure.
+
+#### `sendmsg(self, function: int, data: bytes = b'') -> None`
+**Description:** Packages and sends a `QueryMessage` to the reader.
+
+- **Parameters:**
+  - `function` (`int`): One of `QueryMessage` constants.
+  - `data` (`bytes`): Optional payload.
+- **Behavior:** Serializes and writes raw bytes to the serial port.
+- **Raises:** Propagates exceptions from `serial.write()`.
+
+#### `readmsg(self, sink_events: bool = False) -> ResponseMessage`
+**Description:** Reads and returns the next meaningful response, optionally skipping event notifications.
+
+- **Parameters:**
+  - `sink_events` (`bool`): If `True`, ignore `EVN` messages.
+- **Behavior:** Loops on `ResponseMessage.readfrom`, raises `GNetPlusError` on NAK.
+- **Returns:** A `ResponseMessage` instance.
+- **Raises:** `GNetPlusError`, `InvalidMessage`.
+
+#### `get_version(self) -> str`
+**Description:** Requests and returns the reader’s firmware version.
+
+- **Behavior:** Sends `GET_VERSION`, reads response, decodes to string.
+- **Returns:** Version string (e.g., `"v1.2.3"`).
+- **Raises:** `GNetPlusError`, `InvalidMessage`.
+
+#### `set_auto_mode(self, enable: bool = True) -> None`
+**Description:** Toggles automatic card event reporting mode.
+
+- **Parameters:**
+  - `enable` (`bool`): `True` to enable, `False` to disable.
+- **Behavior:** Sends `AUTO_MODE` with payload `\x01`/`\x00`, validates echo.
+- **Raises:** `GNetPlusError` on mismatched response.
+
+#### `wait_for_card(self, timeout: int = 10) -> Optional[str]`
+**Description:** Blocks until a card arrives or timeout is reached.
+
+- **Parameters:**
+  - `timeout` (`int`): Seconds to wait.
+- **Behavior:** Enables auto mode, tries immediate `get_sn`, then listens for EVN, returns UID.
+- **Returns:** Card UID string or `None`.
+- **Raises:** `TimeoutError`, `GNetPlusError`, `InvalidMessage`.
+
+#### `get_sn(self, endian: str = 'little', as_string: bool = True) -> Union[str, int]`
+**Description:** Retrieves the card’s unique serial number (UID).
+
+- **Parameters:**
+  - `endian` (`'little'` or `'big'`): Byte order.
+  - `as_string` (`bool`): Return hex string if `True`, else integer.
+- **Behavior:** Sends `REQUEST`/`ANTI_COLLISION`, unpacks UID.
+- **Returns:** UID as `"0x..."` or int.
+- **Raises:** `GNetPlusError`, `InvalidMessage`.
+
+#### `authenticate_sector(self, sector: int, key: bytes, key_type: str = 'A') -> None`
+**Description:** Loads and authenticates a MIFARE key for the specified sector.
+
+- **Parameters:**
+  - `sector` (`int`): Sector index (0–15).
+  - `key` (`bytes`): 6-byte MIFARE key.
+  - `key_type` (`'A'` or `'B'`): Key slot selection.
+  - `timeout` (`int`): Timeout in seconds for reader responses.
+  - `flush` (`bool`): Whether to flush the input buffer before reading responses.
+- **Behavior:** Validates params, sends `SAVE_KEY` then `AUTHENTICATE`, checks ACKs.
+- **Raises:** `ValueError`, `GNetPlusError`, `InvalidMessage`.
+
+#### `read_block(self, block: int, raw: bool = False) -> bytes`
+**Description:** Reads exactly 16 bytes from a specific memory block.
+
+- **Parameters:**
+  - `block` (`int`): Block number (0–63).
+- **Behavior:** Sends `READ_BLOCK`, receives data payload.
+- **Returns:** 16 bytes.
+- **Raises:** `GNetPlusError`, `InvalidMessage`.
+
+#### `write_block(self, block: int, data: Union[str, bytes]) -> None`
+**Description:** Writes exactly 16 bytes or 32 bit hex to a specific block.
+
+- **Parameters:**
+  - `block` (`int`): Block number.
+  - `data` (`bytes`): Must be length 16 bytes.
+- **Behavior:** Validates length, sends `WRITE_BLOCK`, confirms ACK.
+- **Raises:** `ValueError`, `GNetPlusError`, `InvalidMessage`.
+
+#### `read_sector(self, raw: bool = False, combine: bool = False) -> Union[Dict[int, Union[str, bytes]], Union[str, bytes]]`
+**Description:** Reads blocks `0,1,2` of the current sector and returns a mapping or concatenated data.
+
+- **Parameters:**
+  - `sector` (`int`): Sector index.
+- **Behavior:** Calls `read_block` for offsets 0–3, returns dict.
+- **Returns:** `{block: data} or combined data byte or hex`.
+- **Raises:** `GNetPlusError`.
+
+#### `write_sector(self, data: Union[str, bytes, Dict[int, Union[str, bytes]]]) -> None`
+**Description:** Writes multiple blocks within one sector using a dictionary.
+
+- **Parameters:**
+  - `sector` (`int`): Sector index.
+  - `data_blocks` (`Dict[int, bytes]`): Map of block offsets to 16-byte data.
+    - **bytes/str length 16:** writes that blob to blocks 0,1,2.
+    - **bytes/str length 48:** splits into three chunks for blocks 0–2.
+    - **dict {block:data}:** dict mapping blocks 0–2 to data blobs and 3 for trailing block.
+- **Behavior:** Iterates and calls `write_block` for each entry.
+- **Raises:** `ValueError`, `GNetPlusError`, `InvalidMessage`.
+
+#### `read_blocks(self, mapping: Dict[int, List[int]], raw: bool = False, combine: bool = False, keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -> Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]) -> Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]`
+**Description:** Read multiple blocks across sectors based on a sector->block-offsets mapping, optionally combining them and authenticating per sector with either a single key for all sectors or individual keys per sector.
+
+- **Parameters:**
+  - `mapping` (`dict`): Dict where keys are sector numbers and values are lists of block offsets (0-3).
+  - `raw` (`bool`): If True, returns bytes; otherwise hex strings.
+  - `combine` (`bool`): If True, returns concatenated data across blocks as a single bytes or hex string.
+  - `keys` (`bytes or doct`): Optional 6-byte key or dict mapping sector->key bytes.
+  - `key_types` (`str or dict`): 'A'/'B' or dict mapping sector->'A'/'B'.
+  - `timeout` (`float or dict`): Timeout in seconds or dict mapping sector->timeout.
+  - `flush` (`bool or dict`): Whether to flush input buffer or dict mapping sector->flush flag.
+- **Behavior:** Returns Nested dict mapping sector -> {offset: data}, or combined bytes/hex.
+- **Raises:** `ValueError`, `GNetPlusError`.
+
+#### `write_blocks(self, mapping: Dict[int, Union[bytes, str, Dict[int, Union[str, bytes]]]], keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -> None`
+**Description:** Write multiple blocks across sectors, supporting a mix of:
+- sector -> blob (bytes or hex-string) (writes that blob to all 4 blocks via write_sector)
+- sector -> {block: data, …} (writes per‐block via write_block)
+
+optionally authenticating per sector with either a global key or per-sector keys.
+
+- **Parameters:**
+  - `mapping` (`dict`): Dict where keys are sector numbers and values are either dict mapping block (0-3) to data or a single blob for the whole sector.
+  - `keys` (`bytes or doct`): Optional 6-byte key or dict mapping sector->key bytes.
+  - `key_types` (`str or dict`): 'A'/'B' or dict mapping sector->'A'/'B'.
+  - `timeout` (`float or dict`): Timeout in seconds or dict mapping sector->timeout.
+  - `flush` (`bool or dict`): Whether to flush input buffer or dict mapping sector->flush flag.
+- **Behavior:** Writes data in the given blocks handling refreshing of card before authentication for new sector.
+- **Raises:** `ValueError`, `GNetPlusError`.
+
+---
+
+### Exception Summary
+
+All methods may raise:
+
+- **`InvalidMessage`**: Frame/CRC parsing errors.
+- **`GNetPlusError`**: Device-signaled errors (NAK).
+- **`RuntimeError`**: Serial port failures.
+- **`ValueError`**: Invalid arguments.
+- **`TimeoutError`**: For `wait_for_card` timeouts.
+
+---
+
+*For real-world code examples using these APIs, see [examples](examples.md).*

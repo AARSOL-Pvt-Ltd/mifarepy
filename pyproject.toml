@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mifarepy"
-version = "1.0.3"
+version = "2.0"
 description = "Python library for interfacing with MIFARE RFID card readers using mifarepy protocol"
 authors = [
     { name = "Spark Drago", email = "huzaifa.farooq05@gmail.com" }

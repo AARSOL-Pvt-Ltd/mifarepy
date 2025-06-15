@@ -35,7 +35,7 @@ import struct
 import sys
 import time
 from typing import Optional, Union, List, Dict
-from protocol import QueryMessage, ResponseMessage, GNetPlusError
+from .protocol import QueryMessage, ResponseMessage, GNetPlusError
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -258,11 +258,10 @@ class MifareReader:
         self.sendmsg(QueryMessage.WRITE_BLOCK, bytes([block]) + data)
         return self.readmsg().data.hex()
 
-    def read_sector(self, sector: int, raw: bool = False, combine: bool = False) -> Union[Dict[int, Union[str, bytes]], Union[str, bytes]]:
+    def read_sector(self, raw: bool = False, combine: bool = False) -> Union[Dict[int, Union[str, bytes]], Union[str, bytes]]:
         """
-        Read all 4 blocks in a given sector, optionally combining them.
+        Read blocks 0,1,2 in a given sector, optionally combining them.
 
-        @param sector: Sector number (0-15).
         @param raw: If True, returns raw bytes; otherwise hex strings.
         @param combine: If True, returns concatenated data across blocks as a single bytes or hex string.
         @return: Dict mapping absolute block number to data (bytes or hex), or combined bytes/hex string.
@@ -270,9 +269,8 @@ class MifareReader:
         """
         results: Dict[int, Union[str, bytes]] = {}
 
-        for offset in range(4):
-            block_num = sector * 4 + offset
-            results[block_num] = self.read_block(block_num, raw=raw)
+        for block in range(3):
+            results[block] = self.read_block(block, raw=raw)
 
         if combine:
             if raw:
@@ -288,7 +286,7 @@ class MifareReader:
         @param data:
           • 16-byte bytes or 32-char hex string → writes that to blocks 0,1,2.
           • 48-byte bytes or 96-char hex string → splits into three 16-byte chunks.
-          • dict mapping offsets 0–2 to data blobs and 3 for trailing block.
+          • dict mapping blocks 0–2 to data blobs and 3 for trailing block.
         @raises ValueError: If data length isn’t one of the supported sizes, or if dict keys are invalid.
         @raises GNetPlusError: If any write fails.
         """
@@ -309,7 +307,7 @@ class MifareReader:
                 self.write_block(block, chunk)
             return
 
-        # Case C: Explicit per-offset dict
+        # Case C: Explicit per-block dict
         if isinstance(data, dict):
             for block, blob in data.items():
                 # Determine absolute block number
@@ -324,24 +322,24 @@ class MifareReader:
             return
 
         raise ValueError(
-            'Unsupported data length %s; must be 16 or 48 bytes, or a dict of offsets→16-byte blobs' % len(data) if isinstance(data, (bytes, bytearray)) else 'unknown')
+            'Unsupported data length %s; must be 16 or 48 bytes, or a dict of blocks→16-byte blobs' % len(data) if isinstance(data, (bytes, bytearray)) else 'unknown')
 
     def read_blocks(self, mapping: Dict[int, List[int]], raw: bool = False, combine: bool = False, keys: Union[bytes, Dict[int, bytes]] = None,
                     key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0,
                     flush: Union[bool, Dict[int, bool]] = True) -> Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]:
         """
-        Read multiple blocks across sectors based on a sector->block-offsets mapping,
+        Read multiple blocks across sectors based on a sector->blocks mapping,
         optionally combining them and authenticating per sector with either a single key
         for all sectors or individual keys per sector.
 
-        @param mapping: Dict where keys are sector numbers and values are lists of block offsets (0-3).
+        @param mapping: Dict where keys are sector numbers and values are lists of blocks (0-3).
         @param raw: If True, returns bytes; otherwise hex strings.
         @param combine: If True, returns concatenated data across blocks as a single bytes or hex string.
         @param keys: Optional 6-byte key or dict mapping sector->key bytes.
         @param key_types: 'A'/'B' or dict mapping sector->'A'/'B'.
         @param timeout: Timeout in seconds or dict mapping sector->timeout.
         @param flush: Whether to flush input buffer or dict mapping sector->flush flag.
-        @return: Nested dict mapping sector -> {offset: data}, or combined bytes/hex.
+        @return: Nested dict mapping sector -> {block: data}, or combined bytes/hex.
         @raises ValueError: If keys or key_types provided but invalid.
         @raises GNetPlusError: If authentication or block read fails.
         """
