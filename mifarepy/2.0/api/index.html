@@ -1,0 +1,1545 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the mifarepy project.">
+      
+      
+        <meta name="author" content="Spark Drago">
+      
+      
+        <link rel="canonical" href="https://aarsol-pvt-ltd.github.io/mifarepy/2.0/api/">
+      
+      
+        <link rel="prev" href="../examples/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>API Reference - mifarepy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../style.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-PZYQH7R8EV"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-PZYQH7R8EV",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-PZYQH7R8EV",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <a href="../..">
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL(".."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="mifarepy" class="md-header__button md-logo" aria-label="mifarepy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mifarepy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AARSOL-Pvt-Ltd/mifarepy/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mifarepy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="mifarepy" class="md-nav__button md-logo" aria-label="mifarepy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mifarepy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AARSOL-Pvt-Ltd/mifarepy/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mifarepy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#package-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocolpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      protocol.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="protocol.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gencrcmsg_bytes-bytes-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      gencrc(msg_bytes: bytes) -&gt; int
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-invalidmessageexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      class InvalidMessage(Exception)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-gnetpluserrorexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      class GNetPlusError(Exception)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      class Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#__bytes__self-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      __bytes__(self) -&gt; bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classmethod-readfromcls-serial_port-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      @classmethod readfrom(cls, serial_port) -&gt; Message
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-querymessagemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      class QueryMessage(Message)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-responsemessagemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      class ResponseMessage(Message)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class ResponseMessage(Message)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to_errorself-optionalgnetpluserror" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_error(self) -&gt; Optional[GNetPlusError]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#readerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      reader.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="reader.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-mifarereader" class="md-nav__link">
+    <span class="md-ellipsis">
+      class MifareReader
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class MifareReader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sendmsgself-function-int-data-bytes-b-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      sendmsg(self, function: int, data: bytes = b'') -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmsgself-sink_events-bool-false-responsemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      readmsg(self, sink_events: bool = False) -&gt; ResponseMessage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_versionself-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_version(self) -&gt; str
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_auto_modeself-enable-bool-true-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_auto_mode(self, enable: bool = True) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait_for_cardself-timeout-int-10-optionalstr" class="md-nav__link">
+    <span class="md-ellipsis">
+      wait_for_card(self, timeout: int = 10) -&gt; Optional[str]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_snself-endian-str-little-as_string-bool-true-unionstr-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_sn(self, endian: str = 'little', as_string: bool = True) -&gt; Union[str, int]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticate_sectorself-sector-int-key-bytes-key_type-str-a-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      authenticate_sector(self, sector: int, key: bytes, key_type: str = 'A') -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_blockself-block-int-raw-bool-false-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_block(self, block: int, raw: bool = False) -&gt; bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_blockself-block-int-data-unionstr-bytes-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_block(self, block: int, data: Union[str, bytes]) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_sectorself-raw-bool-false-combine-bool-false-uniondictint-unionstr-bytes-unionstr-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_sector(self, raw: bool = False, combine: bool = False) -&gt; Union[Dict[int, Union[str, bytes]], Union[str, bytes]]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_sectorself-data-unionstr-bytes-dictint-unionstr-bytes-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_sector(self, data: Union[str, bytes, Dict[int, Union[str, bytes]]]) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_blocksself-mapping-dictint-listint-raw-bool-false-combine-bool-false-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-uniondictint-dictint-unionstr-bytes-unionstr-bytes-uniondictint-dictint-unionstr-bytes-unionstr-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_blocks(self, mapping: Dict[int, List[int]], raw: bool = False, combine: bool = False, keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_blocksself-mapping-dictint-unionbytes-str-dictint-unionstr-bytes-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_blocks(self, mapping: Dict[int, Union[bytes, str, Dict[int, Union[str, bytes]]]], keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exception Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#package-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocolpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      protocol.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="protocol.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gencrcmsg_bytes-bytes-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      gencrc(msg_bytes: bytes) -&gt; int
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-invalidmessageexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      class InvalidMessage(Exception)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-gnetpluserrorexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      class GNetPlusError(Exception)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      class Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#__bytes__self-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      __bytes__(self) -&gt; bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classmethod-readfromcls-serial_port-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      @classmethod readfrom(cls, serial_port) -&gt; Message
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-querymessagemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      class QueryMessage(Message)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-responsemessagemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      class ResponseMessage(Message)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class ResponseMessage(Message)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to_errorself-optionalgnetpluserror" class="md-nav__link">
+    <span class="md-ellipsis">
+      to_error(self) -&gt; Optional[GNetPlusError]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#readerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      reader.py
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="reader.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-mifarereader" class="md-nav__link">
+    <span class="md-ellipsis">
+      class MifareReader
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="class MifareReader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sendmsgself-function-int-data-bytes-b-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      sendmsg(self, function: int, data: bytes = b'') -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readmsgself-sink_events-bool-false-responsemessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      readmsg(self, sink_events: bool = False) -&gt; ResponseMessage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_versionself-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_version(self) -&gt; str
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_auto_modeself-enable-bool-true-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_auto_mode(self, enable: bool = True) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait_for_cardself-timeout-int-10-optionalstr" class="md-nav__link">
+    <span class="md-ellipsis">
+      wait_for_card(self, timeout: int = 10) -&gt; Optional[str]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_snself-endian-str-little-as_string-bool-true-unionstr-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_sn(self, endian: str = 'little', as_string: bool = True) -&gt; Union[str, int]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticate_sectorself-sector-int-key-bytes-key_type-str-a-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      authenticate_sector(self, sector: int, key: bytes, key_type: str = 'A') -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_blockself-block-int-raw-bool-false-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_block(self, block: int, raw: bool = False) -&gt; bytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_blockself-block-int-data-unionstr-bytes-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_block(self, block: int, data: Union[str, bytes]) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_sectorself-raw-bool-false-combine-bool-false-uniondictint-unionstr-bytes-unionstr-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_sector(self, raw: bool = False, combine: bool = False) -&gt; Union[Dict[int, Union[str, bytes]], Union[str, bytes]]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_sectorself-data-unionstr-bytes-dictint-unionstr-bytes-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_sector(self, data: Union[str, bytes, Dict[int, Union[str, bytes]]]) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read_blocksself-mapping-dictint-listint-raw-bool-false-combine-bool-false-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-uniondictint-dictint-unionstr-bytes-unionstr-bytes-uniondictint-dictint-unionstr-bytes-unionstr-bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      read_blocks(self, mapping: Dict[int, List[int]], raw: bool = False, combine: bool = False, keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write_blocksself-mapping-dictint-unionbytes-str-dictint-unionstr-bytes-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_blocks(self, mapping: Dict[int, Union[bytes, str, Dict[int, Union[str, bytes]]]], keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; None
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exception-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exception Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API Reference</h1>
+<p>This document provides an in-depth reference for every public class, function, and method in the <strong>mifarepy</strong> library, complete with parameter descriptions, return values, exceptions raised, and detailed behavior narratives.</p>
+<hr />
+<h2 id="package-structure">Package Structure</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mifarepy/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── protocol.py      # Core message framing, CRC, and error classes
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>└── reader.py        # High-level MifareReader interface and card operations
+</code></pre></div>
+<p>Import core components:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">mifarepy</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy.protocol</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">gencrc</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">Message</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">QueryMessage</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">ResponseMessage</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">InvalidMessage</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">GNetPlusError</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy.reader</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
+</code></pre></div>
+<hr />
+<h2 id="protocolpy"><code>protocol.py</code></h2>
+<h3 id="gencrcmsg_bytes-bytes-int"><code>gencrc(msg_bytes: bytes) -&gt; int</code></h3>
+<p><strong>Description:</strong> Calculates the 16-bit CRC (Cyclic Redundancy Check) for a given sequence of bytes, following the GNetPlus® protocol specification. This checksum is appended to each message to ensure data integrity.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>msg_bytes</code> (<code>bytes</code>): The header and payload bytes over which to compute the CRC (Exclude SOH and the trailing CRC field).</li>
+<li><strong>Returns:</strong></li>
+<li>(<code>int</code>) CRC value ranging from <code>0</code> to <code>0xFFFF</code>.</li>
+<li><strong>Raises:</strong> None.</li>
+</ul>
+<hr />
+<h3 id="class-invalidmessageexception"><code>class InvalidMessage(Exception)</code></h3>
+<p><strong>Description:</strong> Thrown during message parsing when the data read from the serial port is malformed, incomplete, or fails the CRC check.</p>
+<ul>
+<li><strong>Raised When:</strong></li>
+<li>The Start-of-Header (SOH) byte is incorrect.</li>
+<li>The header or payload length is less than expected.</li>
+<li>CRC validation fails.</li>
+</ul>
+<hr />
+<h3 id="class-gnetpluserrorexception"><code>class GNetPlusError(Exception)</code></h3>
+<p><strong>Description:</strong> Represents a protocol-level or device error signaled by a Negative Acknowledge (NAK) from the reader.</p>
+<ul>
+<li><strong>Raised When:</strong> A <code>ResponseMessage</code> with <code>function == ResponseMessage.NAK</code> is received. The exception carries the raw NAK payload for diagnostics.</li>
+</ul>
+<hr />
+<h3 id="class-message"><code>class Message</code></h3>
+<p><strong>Description:</strong> Base class encapsulating the raw binary format of any GNetPlus® message (both queries and responses). Handles packing to bytes and unpacking from bytes with CRC.</p>
+<h4 id="constructor">Constructor</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Message</span><span class="p">(</span><span class="n">address</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span>
+</code></pre></div>
+- <strong>Parameters:</strong>
+  - <code>address</code> (<code>int</code>): The 8-bit device address (commonly <code>0</code>).
+  - <code>function</code> (<code>int</code>): The 8-bit function or command code.
+  - <code>data</code> (<code>bytes</code>): Payload data.
+- <strong>Behavior:</strong> Stores inputs; used by <code>__bytes__</code> and <code>readfrom</code> methods.</p>
+<h4 id="__bytes__self-bytes"><code>__bytes__(self) -&gt; bytes</code></h4>
+<p><strong>Description:</strong> Serializes the <code>Message</code> into the wire format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[SOH=0x01][address][function][length][data...][CRC-high][CRC-low]
+</code></pre></div>
+<ul>
+<li><strong>Returns:</strong> A <code>bytes</code> object ready to write to a serial port.</li>
+</ul>
+<h4 id="classmethod-readfromcls-serial_port-message"><code>@classmethod readfrom(cls, serial_port) -&gt; Message</code></h4>
+<p><strong>Description:</strong> Reads raw bytes from a <code>serial_port</code> instance and constructs a <code>Message</code> object, validating framing and CRC.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>serial_port</code>: An object with a <code>.read(n)</code> method (e.g., <code>serial.Serial</code>).</li>
+<li><strong>Behavior:</strong></li>
+<li>Reads 1 byte for SOH, 3 bytes for header. Validates SOH.</li>
+<li>Extracts <code>address</code>, <code>function</code>, and <code>length</code>.</li>
+<li>Reads <code>length</code> bytes of payload.</li>
+<li>Reads 2-byte CRC, computes expected CRC via <code>gencrc</code>.</li>
+<li>Raises <code>InvalidMessage</code> if any step fails.</li>
+<li><strong>Returns:</strong> A <code>Message</code> instance with <code>.address</code>, <code>.function</code>, <code>.data</code> set.</li>
+<li><strong>Raises:</strong> <code>InvalidMessage</code> on framing, length, or CRC errors.</li>
+</ul>
+<hr />
+<h3 id="class-querymessagemessage"><code>class QueryMessage(Message)</code></h3>
+<p><strong>Description:</strong> Subclass of <code>Message</code> defining constants for all supported outgoing commands in the GNetPlus® protocol.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Hex Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POLLING</code></td>
+<td><code>0x00</code></td>
+<td>Ping the reader to check connectivity</td>
+</tr>
+<tr>
+<td><code>GET_VERSION</code></td>
+<td><code>0x01</code></td>
+<td>Request reader firmware version</td>
+</tr>
+<tr>
+<td><code>AUTO_MODE</code></td>
+<td><code>0x3F</code></td>
+<td>Enable/disable automatic card event reporting</td>
+</tr>
+<tr>
+<td><code>REQUEST</code></td>
+<td><code>0x20</code></td>
+<td>Begin anti-collision to detect one card UID</td>
+</tr>
+<tr>
+<td><code>ANTI_COLLISION</code></td>
+<td><code>0x21</code></td>
+<td>Complete anti-collision, retrieve full UID</td>
+</tr>
+<tr>
+<td><code>SELECT_CARD</code></td>
+<td><code>0x22</code></td>
+<td>Select a specific card after UID retrieval</td>
+</tr>
+<tr>
+<td><code>AUTHENTICATE</code></td>
+<td><code>0x23</code></td>
+<td>Authenticate a sector using loaded key</td>
+</tr>
+<tr>
+<td><code>READ_BLOCK</code></td>
+<td><code>0x24</code></td>
+<td>Read a single 16-byte block</td>
+</tr>
+<tr>
+<td><code>WRITE_BLOCK</code></td>
+<td><code>0x25</code></td>
+<td>Write a single 16-byte block</td>
+</tr>
+<tr>
+<td><code>SAVE_KEY</code></td>
+<td><code>0x2B</code></td>
+<td>Load a 6-byte MIFARE key into reader RAM</td>
+</tr>
+</tbody>
+</table>
+<p>Use these as:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">QueryMessage</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">QueryMessage</span><span class="o">.</span><span class="n">READ_BLOCK</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<h3 id="class-responsemessagemessage"><code>class ResponseMessage(Message)</code></h3>
+<p><strong>Description:</strong> Subclass for replies from the reader. Interprets acknowledgement, errors, and event notifications.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Hex Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACK</code></td>
+<td><code>0x06</code></td>
+<td>Positive acknowledgement</td>
+</tr>
+<tr>
+<td><code>NAK</code></td>
+<td><code>0x15</code></td>
+<td>Negative acknowledgement (error)</td>
+</tr>
+<tr>
+<td><code>EVN</code></td>
+<td><code>0x12</code></td>
+<td>Event notification (e.g., card arrival)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="to_errorself-optionalgnetpluserror"><code>to_error(self) -&gt; Optional[GNetPlusError]</code></h4>
+<p><strong>Description:</strong> Converts a NAK response into a <code>GNetPlusError</code>. If the response is not NAK, returns <code>None</code>.</p>
+<ul>
+<li><strong>Returns:</strong> A <code>GNetPlusError</code> instance for NAK responses, or <code>None</code> otherwise.</li>
+</ul>
+<hr />
+<h2 id="readerpy">reader.py</h2>
+<h3 id="class-mifarereader"><code>class MifareReader</code></h3>
+<p><strong>Description:</strong> High-level interface encapsulating serial communication and common card operations. Simplifies sending commands, parsing responses, and handling errors.</p>
+<h4 id="constructor_1">Constructor</h4>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">MifareReader</span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">port</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">baudrate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">19200</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">address</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="o">**</span><span class="n">kwargs</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
+</code></pre></div>
+- <strong>Parameters:</strong>
+  - <code>port</code> (<code>str</code>): Path to serial device or COM port.
+  - <code>baudrate</code> (<code>int</code>): Communication speed (default <code>19200</code>).
+  - <code>address</code> (<code>int</code>): Reader device address (usually 0).
+  - <code>**kwargs</code>: Additional settings for <code>serial.Serial</code> (e.g., <code>timeout</code>).
+- <strong>Behavior:</strong> Opens serial port; raises <code>RuntimeError</code> on failure.</p>
+<h4 id="sendmsgself-function-int-data-bytes-b-none"><code>sendmsg(self, function: int, data: bytes = b'') -&gt; None</code></h4>
+<p><strong>Description:</strong> Packages and sends a <code>QueryMessage</code> to the reader.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>function</code> (<code>int</code>): One of <code>QueryMessage</code> constants.</li>
+<li><code>data</code> (<code>bytes</code>): Optional payload.</li>
+<li><strong>Behavior:</strong> Serializes and writes raw bytes to the serial port.</li>
+<li><strong>Raises:</strong> Propagates exceptions from <code>serial.write()</code>.</li>
+</ul>
+<h4 id="readmsgself-sink_events-bool-false-responsemessage"><code>readmsg(self, sink_events: bool = False) -&gt; ResponseMessage</code></h4>
+<p><strong>Description:</strong> Reads and returns the next meaningful response, optionally skipping event notifications.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>sink_events</code> (<code>bool</code>): If <code>True</code>, ignore <code>EVN</code> messages.</li>
+<li><strong>Behavior:</strong> Loops on <code>ResponseMessage.readfrom</code>, raises <code>GNetPlusError</code> on NAK.</li>
+<li><strong>Returns:</strong> A <code>ResponseMessage</code> instance.</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="get_versionself-str"><code>get_version(self) -&gt; str</code></h4>
+<p><strong>Description:</strong> Requests and returns the reader’s firmware version.</p>
+<ul>
+<li><strong>Behavior:</strong> Sends <code>GET_VERSION</code>, reads response, decodes to string.</li>
+<li><strong>Returns:</strong> Version string (e.g., <code>"v1.2.3"</code>).</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="set_auto_modeself-enable-bool-true-none"><code>set_auto_mode(self, enable: bool = True) -&gt; None</code></h4>
+<p><strong>Description:</strong> Toggles automatic card event reporting mode.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>enable</code> (<code>bool</code>): <code>True</code> to enable, <code>False</code> to disable.</li>
+<li><strong>Behavior:</strong> Sends <code>AUTO_MODE</code> with payload <code>\x01</code>/<code>\x00</code>, validates echo.</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code> on mismatched response.</li>
+</ul>
+<h4 id="wait_for_cardself-timeout-int-10-optionalstr"><code>wait_for_card(self, timeout: int = 10) -&gt; Optional[str]</code></h4>
+<p><strong>Description:</strong> Blocks until a card arrives or timeout is reached.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>timeout</code> (<code>int</code>): Seconds to wait.</li>
+<li><strong>Behavior:</strong> Enables auto mode, tries immediate <code>get_sn</code>, then listens for EVN, returns UID.</li>
+<li><strong>Returns:</strong> Card UID string or <code>None</code>.</li>
+<li><strong>Raises:</strong> <code>TimeoutError</code>, <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="get_snself-endian-str-little-as_string-bool-true-unionstr-int"><code>get_sn(self, endian: str = 'little', as_string: bool = True) -&gt; Union[str, int]</code></h4>
+<p><strong>Description:</strong> Retrieves the card’s unique serial number (UID).</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>endian</code> (<code>'little'</code> or <code>'big'</code>): Byte order.</li>
+<li><code>as_string</code> (<code>bool</code>): Return hex string if <code>True</code>, else integer.</li>
+<li><strong>Behavior:</strong> Sends <code>REQUEST</code>/<code>ANTI_COLLISION</code>, unpacks UID.</li>
+<li><strong>Returns:</strong> UID as <code>"0x..."</code> or int.</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="authenticate_sectorself-sector-int-key-bytes-key_type-str-a-none"><code>authenticate_sector(self, sector: int, key: bytes, key_type: str = 'A') -&gt; None</code></h4>
+<p><strong>Description:</strong> Loads and authenticates a MIFARE key for the specified sector.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>sector</code> (<code>int</code>): Sector index (0–15).</li>
+<li><code>key</code> (<code>bytes</code>): 6-byte MIFARE key.</li>
+<li><code>key_type</code> (<code>'A'</code> or <code>'B'</code>): Key slot selection.</li>
+<li><code>timeout</code> (<code>int</code>): Timeout in seconds for reader responses.</li>
+<li><code>flush</code> (<code>bool</code>): Whether to flush the input buffer before reading responses.</li>
+<li><strong>Behavior:</strong> Validates params, sends <code>SAVE_KEY</code> then <code>AUTHENTICATE</code>, checks ACKs.</li>
+<li><strong>Raises:</strong> <code>ValueError</code>, <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="read_blockself-block-int-raw-bool-false-bytes"><code>read_block(self, block: int, raw: bool = False) -&gt; bytes</code></h4>
+<p><strong>Description:</strong> Reads exactly 16 bytes from a specific memory block.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>block</code> (<code>int</code>): Block number (0–63).</li>
+<li><strong>Behavior:</strong> Sends <code>READ_BLOCK</code>, receives data payload.</li>
+<li><strong>Returns:</strong> 16 bytes.</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="write_blockself-block-int-data-unionstr-bytes-none"><code>write_block(self, block: int, data: Union[str, bytes]) -&gt; None</code></h4>
+<p><strong>Description:</strong> Writes exactly 16 bytes or 32 bit hex to a specific block.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>block</code> (<code>int</code>): Block number.</li>
+<li><code>data</code> (<code>bytes</code>): Must be length 16 bytes.</li>
+<li><strong>Behavior:</strong> Validates length, sends <code>WRITE_BLOCK</code>, confirms ACK.</li>
+<li><strong>Raises:</strong> <code>ValueError</code>, <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="read_sectorself-raw-bool-false-combine-bool-false-uniondictint-unionstr-bytes-unionstr-bytes"><code>read_sector(self, raw: bool = False, combine: bool = False) -&gt; Union[Dict[int, Union[str, bytes]], Union[str, bytes]]</code></h4>
+<p><strong>Description:</strong> Reads blocks <code>0,1,2</code> of the current sector and returns a mapping or concatenated data.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>sector</code> (<code>int</code>): Sector index.</li>
+<li><strong>Behavior:</strong> Calls <code>read_block</code> for offsets 0–3, returns dict.</li>
+<li><strong>Returns:</strong> <code>{block: data} or combined data byte or hex</code>.</li>
+<li><strong>Raises:</strong> <code>GNetPlusError</code>.</li>
+</ul>
+<h4 id="write_sectorself-data-unionstr-bytes-dictint-unionstr-bytes-none"><code>write_sector(self, data: Union[str, bytes, Dict[int, Union[str, bytes]]]) -&gt; None</code></h4>
+<p><strong>Description:</strong> Writes multiple blocks within one sector using a dictionary.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>sector</code> (<code>int</code>): Sector index.</li>
+<li><code>data_blocks</code> (<code>Dict[int, bytes]</code>): Map of block offsets to 16-byte data.<ul>
+<li><strong>bytes/str length 16:</strong> writes that blob to blocks 0,1,2.</li>
+<li><strong>bytes/str length 48:</strong> splits into three chunks for blocks 0–2.</li>
+<li><strong>dict {block:data}:</strong> dict mapping blocks 0–2 to data blobs and 3 for trailing block.</li>
+</ul>
+</li>
+<li><strong>Behavior:</strong> Iterates and calls <code>write_block</code> for each entry.</li>
+<li><strong>Raises:</strong> <code>ValueError</code>, <code>GNetPlusError</code>, <code>InvalidMessage</code>.</li>
+</ul>
+<h4 id="read_blocksself-mapping-dictint-listint-raw-bool-false-combine-bool-false-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-uniondictint-dictint-unionstr-bytes-unionstr-bytes-uniondictint-dictint-unionstr-bytes-unionstr-bytes"><code>read_blocks(self, mapping: Dict[int, List[int]], raw: bool = False, combine: bool = False, keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]) -&gt; Union[Dict[int, Dict[int, Union[str, bytes]]], Union[str, bytes]]</code></h4>
+<p><strong>Description:</strong> Read multiple blocks across sectors based on a sector-&gt;block-offsets mapping, optionally combining them and authenticating per sector with either a single key for all sectors or individual keys per sector.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>mapping</code> (<code>dict</code>): Dict where keys are sector numbers and values are lists of block offsets (0-3).</li>
+<li><code>raw</code> (<code>bool</code>): If True, returns bytes; otherwise hex strings.</li>
+<li><code>combine</code> (<code>bool</code>): If True, returns concatenated data across blocks as a single bytes or hex string.</li>
+<li><code>keys</code> (<code>bytes or doct</code>): Optional 6-byte key or dict mapping sector-&gt;key bytes.</li>
+<li><code>key_types</code> (<code>str or dict</code>): 'A'/'B' or dict mapping sector-&gt;'A'/'B'.</li>
+<li><code>timeout</code> (<code>float or dict</code>): Timeout in seconds or dict mapping sector-&gt;timeout.</li>
+<li><code>flush</code> (<code>bool or dict</code>): Whether to flush input buffer or dict mapping sector-&gt;flush flag.</li>
+<li><strong>Behavior:</strong> Returns Nested dict mapping sector -&gt; {offset: data}, or combined bytes/hex.</li>
+<li><strong>Raises:</strong> <code>ValueError</code>, <code>GNetPlusError</code>.</li>
+</ul>
+<h4 id="write_blocksself-mapping-dictint-unionbytes-str-dictint-unionstr-bytes-keys-unionbytes-dictint-bytes-none-key_types-unionstr-dictint-str-a-timeout-unionfloat-dictint-float-10-flush-unionbool-dictint-bool-true-none"><code>write_blocks(self, mapping: Dict[int, Union[bytes, str, Dict[int, Union[str, bytes]]]], keys: Union[bytes, Dict[int, bytes]] = None, key_types: Union[str, Dict[int, str]] = 'A', timeout: Union[float, Dict[int, float]] = 1.0, flush: Union[bool, Dict[int, bool]] = True) -&gt; None</code></h4>
+<p><strong>Description:</strong> Write multiple blocks across sectors, supporting a mix of:
+- sector -&gt; blob (bytes or hex-string) (writes that blob to all 4 blocks via write_sector)
+- sector -&gt; {block: data, …} (writes per‐block via write_block)</p>
+<p>optionally authenticating per sector with either a global key or per-sector keys.</p>
+<ul>
+<li><strong>Parameters:</strong></li>
+<li><code>mapping</code> (<code>dict</code>): Dict where keys are sector numbers and values are either dict mapping block (0-3) to data or a single blob for the whole sector.</li>
+<li><code>keys</code> (<code>bytes or doct</code>): Optional 6-byte key or dict mapping sector-&gt;key bytes.</li>
+<li><code>key_types</code> (<code>str or dict</code>): 'A'/'B' or dict mapping sector-&gt;'A'/'B'.</li>
+<li><code>timeout</code> (<code>float or dict</code>): Timeout in seconds or dict mapping sector-&gt;timeout.</li>
+<li><code>flush</code> (<code>bool or dict</code>): Whether to flush input buffer or dict mapping sector-&gt;flush flag.</li>
+<li><strong>Behavior:</strong> Writes data in the given blocks handling refreshing of card before authentication for new sector.</li>
+<li><strong>Raises:</strong> <code>ValueError</code>, <code>GNetPlusError</code>.</li>
+</ul>
+<hr />
+<h3 id="exception-summary">Exception Summary</h3>
+<p>All methods may raise:</p>
+<ul>
+<li><strong><code>InvalidMessage</code></strong>: Frame/CRC parsing errors.</li>
+<li><strong><code>GNetPlusError</code></strong>: Device-signaled errors (NAK).</li>
+<li><strong><code>RuntimeError</code></strong>: Serial port failures.</li>
+<li><strong><code>ValueError</code></strong>: Invalid arguments.</li>
+<li><strong><code>TimeoutError</code></strong>: For <code>wait_for_card</code> timeouts.</li>
+</ul>
+<hr />
+<p><em>For real-world code examples using these APIs, see <a href="../examples/">examples</a>.</em></p>
+
+
+
+
+
+
+
+
+  <aside class="md-source-file">
+    
+    
+    
+      
+  
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Contributors">
+      
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
+      
+    </span>
+    <nav>
+      
+        <a href="mailto:huzaifa.farooq@aarsol.com">Huzaifa Farooq</a>
+    </nav>
+  </span>
+
+    
+    
+  </aside>
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81"/></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14"/></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback! Help us improve this page by opening a <a href="https://github.com/AARSOL-Pvt-Ltd/mifarepy/issues/new?template=feedback.md" target="_blank" rel="noopener">feedback issue</a>.
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
