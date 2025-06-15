@@ -406,54 +406,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-detect-and-read-card-uid" class="md-nav__link">
+  <a href="#example-1-authenticating-a-sector-and-reading-from-a-block" class="md-nav__link">
     <span class="md-ellipsis">
-      1️⃣ Detect and Read Card UID
+      Example 1: Authenticating a Sector and Reading from a Block
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-authenticate-sector-read-block" class="md-nav__link">
+  <a href="#example-2-switching-sectors-and-refreshing-the-card-session" class="md-nav__link">
     <span class="md-ellipsis">
-      2️⃣ Authenticate Sector &amp; Read Block
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-write-to-a-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      3️⃣ Write to a Block
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-read-entire-sector" class="md-nav__link">
-    <span class="md-ellipsis">
-      4️⃣ Read Entire Sector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-write-multiple-blocks-in-sector" class="md-nav__link">
-    <span class="md-ellipsis">
-      5️⃣ Write Multiple Blocks in Sector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-bulk-mapping-read-and-write" class="md-nav__link">
-    <span class="md-ellipsis">
-      6️⃣ Bulk Mapping: Read and Write
+      Example 2: Switching Sectors and Refreshing the Card Session
     </span>
   </a>
   
@@ -536,54 +500,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-detect-and-read-card-uid" class="md-nav__link">
+  <a href="#example-1-authenticating-a-sector-and-reading-from-a-block" class="md-nav__link">
     <span class="md-ellipsis">
-      1️⃣ Detect and Read Card UID
+      Example 1: Authenticating a Sector and Reading from a Block
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-authenticate-sector-read-block" class="md-nav__link">
+  <a href="#example-2-switching-sectors-and-refreshing-the-card-session" class="md-nav__link">
     <span class="md-ellipsis">
-      2️⃣ Authenticate Sector &amp; Read Block
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-write-to-a-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      3️⃣ Write to a Block
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-read-entire-sector" class="md-nav__link">
-    <span class="md-ellipsis">
-      4️⃣ Read Entire Sector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-write-multiple-blocks-in-sector" class="md-nav__link">
-    <span class="md-ellipsis">
-      5️⃣ Write Multiple Blocks in Sector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-bulk-mapping-read-and-write" class="md-nav__link">
-    <span class="md-ellipsis">
-      6️⃣ Bulk Mapping: Read and Write
+      Example 2: Switching Sectors and Refreshing the Card Session
     </span>
   </a>
   
@@ -608,123 +536,76 @@
   
 
 
-<h1 id="examples">🔍 Examples</h1>
-<p>These examples demonstrate common <strong>mifarepy</strong> workflows using the <code>MifareReader</code> API.</p>
-<hr />
-<h2 id="1-detect-and-read-card-uid">1️⃣ Detect and Read Card UID</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
+<h1 id="examples">📝 Examples</h1>
+<h3 id="example-1-authenticating-a-sector-and-reading-from-a-block">Example 1: Authenticating a Sector and Reading from a Block</h3>
+<p>In this example, we demonstrate how to save the default key, authenticate a specific sector, and then read data from a block within that sector.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Handle</span><span class="p">,</span> <span class="n">QueryMessage</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 1. Initialize reader</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 2. Enable auto‐mode and wait for a card</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">reader</span><span class="o">.</span><span class="n">set_auto_mode</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">uid</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">wait_for_card</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Detected card UID: </span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⏰ No card detected within 5 seconds.&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Initialize the RFID reader handle on the correct serial port.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">handle</span> <span class="o">=</span> <span class="n">Handle</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Wait for a card to be detected.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">handle</span><span class="o">.</span><span class="n">wait_for_card</span><span class="p">()</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># --- Step 1: Save the Key to the Reader ---</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">sector</span> <span class="o">=</span> <span class="mi">2</span>                       <span class="c1"># The sector to authenticate.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">key_type</span> <span class="o">=</span> <span class="mh">0x60</span>                  <span class="c1"># Key A (use 0x61 for Key B if required).</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">default_key</span> <span class="o">=</span> <span class="s2">&quot;FFFFFFFFFFFF&quot;</span>      <span class="c1"># Default key in hexadecimal.</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Build the payload: key type (1 byte), sector (1 byte), followed by key bytes.</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">save_key_data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">key_type</span><span class="p">,</span> <span class="n">sector</span><span class="p">])</span> <span class="o">+</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">default_key</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">SAVE_KEY</span><span class="p">,</span> <span class="n">save_key_data</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">save_key_ack</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SAVE_KEY ACK:&quot;</span><span class="p">,</span> <span class="n">save_key_ack</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c1"># --- Step 2: Authenticate the Sector ---</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">auth_data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">key_type</span><span class="p">,</span> <span class="n">sector</span><span class="p">])</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">AUTHENTICATE</span><span class="p">,</span> <span class="n">auth_data</span><span class="p">)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">auth_ack</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUTHENTICATE ACK:&quot;</span><span class="p">,</span> <span class="n">auth_ack</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="c1"># --- Step 3: Read from a Block in the Authenticated Sector ---</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">block_number</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># The block number to read from.</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">READ_BLOCK</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">block_number</span><span class="p">]))</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">block_response</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Block Data:&quot;</span><span class="p">,</span> <span class="n">block_response</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
 </code></pre></div>
-<p><strong>What’s happening</strong>:
-- <code>set_auto_mode(True)</code>: Reader emits events when cards enter field.
-- <code>wait_for_card()</code>: Blocks until a card is seen or timeout.</p>
-<hr />
-<h2 id="2-authenticate-sector-read-block">2️⃣ Authenticate Sector &amp; Read Block</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
+<h3 id="example-2-switching-sectors-and-refreshing-the-card-session">Example 2: Switching Sectors and Refreshing the Card Session</h3>
+<p>When switching to a new sector, it's important to refresh the card session by sending an ANTI_COLLISION command. This example shows how to do that before authenticating the new sector and reading from a block.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Handle</span><span class="p">,</span> <span class="n">QueryMessage</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Default MIFARE Key A</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">key_a</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s1">&#39;FFFFFFFFFFFF&#39;</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">sector</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">block</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># first block in sector 1</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Authenticate sector</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">reader</span><span class="o">.</span><span class="n">authenticate_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="n">sector</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key_a</span><span class="p">,</span> <span class="n">key_type</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># Read block data</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_block</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Block </span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="s2"> data: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Initialize the RFID reader handle.</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">handle</span> <span class="o">=</span> <span class="n">Handle</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Assume you have finished operations in the current sector.</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Now you want to switch to a new sector (e.g., sector 3).</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">new_sector</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">key_type</span> <span class="o">=</span> <span class="mh">0x60</span>                  <span class="c1"># Using Key A.</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">default_key</span> <span class="o">=</span> <span class="s2">&quot;FFFFFFFFFFFF&quot;</span>      <span class="c1"># Default key in hexadecimal.</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># --- Step 1: Refresh the Card Session ---</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># When switching sectors, send the ANTI_COLLISION command to re-identify the card.</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">ANTI_COLLISION</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">anti_collision_response</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">(</span><span class="n">sink_events</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ANTI_COLLISION Response:&quot;</span><span class="p">,</span> <span class="n">anti_collision_response</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1"># --- Step 2: Save the Key for the New Sector ---</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">save_key_data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">key_type</span><span class="p">,</span> <span class="n">new_sector</span><span class="p">])</span> <span class="o">+</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">default_key</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">SAVE_KEY</span><span class="p">,</span> <span class="n">save_key_data</span><span class="p">)</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">save_key_ack</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SAVE_KEY ACK (New Sector):&quot;</span><span class="p">,</span> <span class="n">save_key_ack</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="c1"># --- Step 3: Authenticate the New Sector ---</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">auth_data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">key_type</span><span class="p">,</span> <span class="n">new_sector</span><span class="p">])</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">AUTHENTICATE</span><span class="p">,</span> <span class="n">auth_data</span><span class="p">)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="n">auth_ack</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AUTHENTICATE ACK (New Sector):&quot;</span><span class="p">,</span> <span class="n">auth_ack</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="c1"># --- Step 4: Read from a Block in the New Sector ---</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="n">block_number</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Specify the block number to read from in the new sector.</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="n">handle</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">(</span><span class="n">QueryMessage</span><span class="o">.</span><span class="n">READ_BLOCK</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">block_number</span><span class="p">]))</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="n">block_response</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">readmsg</span><span class="p">()</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Block Data (New Sector):&quot;</span><span class="p">,</span> <span class="n">block_response</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
 </code></pre></div>
-<p><strong>Details</strong>:
-- <code>authenticate_sector()</code>: Loads and uses Key A to unlock sector.
-- <code>read_block()</code>: Reads 16 bytes from specified block index.</p>
-<hr />
-<h2 id="3-write-to-a-block">3️⃣ Write to a Block</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Authenticate first</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">reader</span><span class="o">.</span><span class="n">authenticate_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key_a</span><span class="p">)</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Prepare payload</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">payload</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>  <span class="c1"># 0x00..0x0F</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">block</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Second block in Sector 1</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># Write and verify</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">reader</span><span class="o">.</span><span class="n">write_block</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✍️ Wrote to block </span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="s2"> successfully.&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Note</strong>: Data must be exactly 16 bytes.</p>
-<hr />
-<h2 id="4-read-entire-sector">4️⃣ Read Entire Sector</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">reader</span><span class="o">.</span><span class="n">authenticate_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key_a</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">sector_data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">for</span> <span class="n">block</span><span class="p">,</span> <span class="n">blk_data</span> <span class="ow">in</span> <span class="n">sector_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Block </span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">blk_data</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li>Returns a mapping of offsets (0–3) to block bytes.</li>
-</ul>
-<hr />
-<h2 id="5-write-multiple-blocks-in-sector">5️⃣ Write Multiple Blocks in Sector</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">reader</span><span class="o">.</span><span class="n">authenticate_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key_a</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">updates</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="mi">0</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0xAA</span><span class="p">]</span> <span class="o">*</span> <span class="mi">16</span><span class="p">),</span>  <span class="c1"># First Block of Sector 2 </span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="mi">2</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0xBB</span><span class="p">]</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>   <span class="c1"># Third Block of Sector 2</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">reader</span><span class="o">.</span><span class="n">write_sector</span><span class="p">(</span><span class="n">sector</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">data_blocks</span><span class="o">=</span><span class="n">updates</span><span class="p">)</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔧 Sector 2 updated on blocks 0 and 2.&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Data for unspecified offsets remains unchanged.</p>
-<hr />
-<h2 id="6-bulk-mapping-read-and-write">6️⃣ Bulk Mapping: Read and Write</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mifarepy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MifareReader</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">reader</span> <span class="o">=</span> <span class="n">MifareReader</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Define mapping: sector → list of offsets</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">read_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]}</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># Optionally provide per-sector keys</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">keys</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">key_a</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">key_a</span><span class="p">}</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read_blocks</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">read_map</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># Write mapping: full blob for sector 1 and dict for sector 3</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="n">write_map</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="mi">1</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">48</span><span class="p">)),</span>             <span class="c1"># three-block blob</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;HELLO-R3&#39;</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;BYE-R3&#39;</span><span class="o">*</span><span class="mi">2</span><span class="p">}</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="p">}</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">reader</span><span class="o">.</span><span class="n">write_blocks</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">write_map</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">)</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚀 Bulk operations complete.&quot;</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li><strong><code>read_blocks</code></strong>: Reads arbitrary sets of blocks across sectors.</li>
-<li><strong><code>write_blocks</code></strong>: Writes sector-wide or per-block based on mapping.</li>
-</ul>
-<hr />
-<p><em>For more details, see <a href="../usage/">usage</a> and <a href="../api/">api</a>.</em></p>
 
 
 
@@ -742,13 +623,12 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:huzaifa.farooq@aarsol.com">Huzaifa Farooq</a>, 
-        <a href="mailto:not.committed.yet">Not Committed Yet</a>
+        <a href="mailto:huzaifa.farooq@aarsol.com">Huzaifa Farooq</a>
     </nav>
   </span>
 

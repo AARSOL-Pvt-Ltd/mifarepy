@@ -364,54 +364,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⚙️ Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#install-from-pypi" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Install from PyPI
+      Install from PyPI
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#editable-development-install" class="md-nav__link">
+  <a href="#manual-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      🔧 Editable / Development Install
+      Manual Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-source-install" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
-      📁 Manual / Source Install
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-pyprojecttoml-pep-517518" class="md-nav__link">
-    <span class="md-ellipsis">
-      🐍 Using pyproject.toml (PEP 517/518)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔍 Verify Installation
+      Prerequisites
     </span>
   </a>
   
@@ -536,54 +509,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      ⚙️ Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#install-from-pypi" class="md-nav__link">
     <span class="md-ellipsis">
-      📦 Install from PyPI
+      Install from PyPI
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#editable-development-install" class="md-nav__link">
+  <a href="#manual-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      🔧 Editable / Development Install
+      Manual Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-source-install" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
-      📁 Manual / Source Install
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-pyprojecttoml-pep-517518" class="md-nav__link">
-    <span class="md-ellipsis">
-      🐍 Using pyproject.toml (PEP 517/518)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      🔍 Verify Installation
+      Prerequisites
     </span>
   </a>
   
@@ -609,59 +555,21 @@
 
 
 <h1 id="installation-guide">📥 Installation Guide</h1>
-<p>This guide covers different ways to install <strong>mifarepy</strong> and its prerequisites.</p>
-<hr />
-<h2 id="prerequisites">⚙️ Prerequisites</h2>
+<h3 id="install-from-pypi"><strong>Install from PyPI</strong></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mifarepy
+</code></pre></div>
+<h3 id="manual-installation"><strong>Manual Installation</strong></h3>
+<p>Clone the repository and install dependencies manually:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AARSOL-Pvt-Ltd/mifarepy.git
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>mifarepy
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div></p>
+<h3 id="prerequisites"><strong>Prerequisites</strong></h3>
 <ul>
-<li><strong>Python version:</strong> 3.7 or newer 🐍  </li>
-<li><strong>pyserial:</strong> Installed automatically via PyPI, but ensure no conflicts.  </li>
-<li><strong>Permissions (Linux):</strong> Add your user to the <code>dialout</code> group to access serial ports:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>dialout<span class="w"> </span><span class="nv">$USER</span>
-</code></pre></div>
-  Then log out and back in, or restart.</li>
-<li><strong>Windows:</strong> Identify your COM port (e.g., <code>COM3</code>) and install the driver if needed.</li>
+<li>Ensure you have Python 3.6+ installed.</li>
+<li>Make sure the <code>pyserial</code> library is available (it’s installed automatically with <code>mifarepy</code> via PyPI).</li>
 </ul>
-<hr />
-<h2 id="install-from-pypi">📦 Install from PyPI</h2>
-<p>The simplest way is via pip:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>mifarepy
-</code></pre></div>
-<p>This installs the latest stable release and its dependencies (including <code>pyserial</code>).</p>
-<hr />
-<h2 id="editable-development-install">🔧 Editable / Development Install</h2>
-<p>If you plan to develop or contribute to <strong>mifarepy</strong>, install in editable mode:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/SparkDrago05/mifarepy.git
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>mifarepy
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</code></pre></div>
-<p>This links the repository into your environment so changes are picked up immediately.</p>
-<hr />
-<h2 id="manual-source-install">📁 Manual / Source Install</h2>
-<p>For environments without PyPI access, install from source:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/SparkDrago05/mifarepy.git
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>mifarepy
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Create a virtual environment (optional but recommended)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># Windows: venv\Scripts\activate</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</code></pre></div>
-<blockquote>
-<p><strong>Note:</strong> Ensure <code>requirements.txt</code> is up to date. Alternatively, you can use <code>pip install -e .</code> as above.</p>
-</blockquote>
-<hr />
-<h2 id="using-pyprojecttoml-pep-517518">🐍 Using pyproject.toml (PEP 517/518)</h2>
-<p>If you use modern tooling:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip<span class="w"> </span>install<span class="w"> </span>build
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python<span class="w"> </span>-m<span class="w"> </span>build<span class="w">  </span><span class="c1"># will generate wheel and sdist in dist/</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>pip<span class="w"> </span>install<span class="w"> </span>dist/mifarepy-*.whl
-</code></pre></div>
-<hr />
-<h2 id="verify-installation">🔍 Verify Installation</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import mifarepy; print(mifarepy.__version__)&quot;</span>
-</code></pre></div>
-<p>You should see the installed version number, confirming a successful install.</p>
-<hr />
-<p>For further configuration and advanced usage, see the <a href="../api/">API Reference</a> and <a href="../usage/">Usage Guide</a>. 🎉</p>
+<p>For additional setup instructions or troubleshooting tips, refer to the <a href="../api/">API Reference</a> and <a href="../usage/">Usage Guide</a>.</p>
 
 
 
@@ -679,13 +587,12 @@
   <span class="md-source-file__fact">
     <span class="md-icon" title="Contributors">
       
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5.5A3.5 3.5 0 0 1 15.5 9a3.5 3.5 0 0 1-3.5 3.5A3.5 3.5 0 0 1 8.5 9 3.5 3.5 0 0 1 12 5.5M5 8c.56 0 1.08.15 1.53.42-.15 1.43.27 2.85 1.13 3.96C7.16 13.34 6.16 14 5 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3m14 0a3 3 0 0 1 3 3 3 3 0 0 1-3 3c-1.16 0-2.16-.66-2.66-1.62a5.54 5.54 0 0 0 1.13-3.96c.45-.27.97-.42 1.53-.42M5.5 18.25c0-2.07 2.91-3.75 6.5-3.75s6.5 1.68 6.5 3.75V20h-13zM0 20v-1.5c0-1.39 1.89-2.56 4.45-2.9-.59.68-.95 1.62-.95 2.65V20zm24 0h-3.5v-1.75c0-1.03-.36-1.97-.95-2.65 2.56.34 4.45 1.51 4.45 2.9z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"/></svg>
       
     </span>
     <nav>
       
-        <a href="mailto:huzaifa.farooq@aarsol.com">Huzaifa Farooq</a>, 
-        <a href="mailto:not.committed.yet">Not Committed Yet</a>
+        <a href="mailto:huzaifa.farooq@aarsol.com">Huzaifa Farooq</a>
     </nav>
   </span>
 
